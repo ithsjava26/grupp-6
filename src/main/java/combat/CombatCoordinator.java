@@ -2,8 +2,13 @@ package combat;
 
 import common.*;
 /*
+Person C will call this class to create heroes and enemies and to run a fight
+(it does not handle the work it sends the work to your own classes in your package!)
 Person A Combat and Character
-this class is everything Person C needs to be able to call for running the game
+
+- write a Hero and Enemy class
+- make enemies stronger in later rooms
+- write the fight loop (Who attacks first and more)
 
  */
 

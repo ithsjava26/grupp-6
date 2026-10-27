@@ -7,6 +7,16 @@ import common.ShopOffer;
 
 import java.util.List;
 
+/*
+Person C will call this class to create an inventory and to buy Items to use inGame.
+
+Person B: Items and Inventory
+- Write inventory class
+- Use factry pattern to create items (Type and level)
+- Generate random shopOffers
+- Write buying items
+ */
+
 public class Shop implements ShopInfo {
     @Override
     public Inventory createInventor() {
