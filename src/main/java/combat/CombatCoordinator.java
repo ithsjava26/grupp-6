@@ -18,12 +18,14 @@ public class CombatCoordinator implements FighterInfo {
 
     @Override
     public Hero createNewHero(String name, Inventory inventory) {
-        throw new UnsupportedOperationException("TODO -> Person A");
+        return new Player(name, Player.MAX_HEALTH, Player.MAX_HEALTH,
+                Player.START_ATTACK, Player.START_GOLD, inventory);
     }
 
     @Override
     public Hero loadHero(String name, int health, int gold, Inventory inventory) {
-        throw new UnsupportedOperationException("TODO -> Person A");
+        return new Player(name, Player.MAX_HEALTH, health,
+                Player.START_ATTACK, gold, inventory);
     }
 
     @Override
