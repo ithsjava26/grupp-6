@@ -1,4 +1,4 @@
-package se.grupp6;
+package world;
 
 import org.junit.jupiter.api.Test;
 
