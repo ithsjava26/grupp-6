@@ -5,7 +5,7 @@ import java.util.List;
 // generating shop offers and buying items.
 public interface ShopInfo {
 
-    Inventory createInventor();
+    Inventory createInventory(); // Fixed typo
     List<ShopOffer> generateOffers(int roomNumber);
 
     //True if Player could buy, False if something went wrong
