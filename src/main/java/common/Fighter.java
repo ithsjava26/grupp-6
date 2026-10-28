@@ -1,7 +1,7 @@
 package common;
 //Used by Enemy and player
 public interface Fighter {
-    String getName();  // Fixed typo
+    String getName(); // fixed typo
     int getHealth();
     int getMaxHealth();
     int getAttack();

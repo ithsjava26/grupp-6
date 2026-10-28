@@ -1,4 +1,4 @@
 package common;
 
-public record Item(String name, Itemtype type, int level) {
+public record Item(String name, ItemType type, int level) {
 }
