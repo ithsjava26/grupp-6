@@ -3,9 +3,9 @@ package common;
 public interface Hero extends Fighter{
     int getGold();
 
-    void addGold(int amount); // Changed double to int
+    void addGold(int amount);
 
-    boolean spendGold(int amount); // Changed double to int
+    boolean spendGold(int amount);
 
     void heal(int amount);
     Inventory getInventory();
