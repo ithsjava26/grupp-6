@@ -25,7 +25,7 @@ public class Monster implements Enemy {
 
     @Override
     public String getName() {
-        return "";
+        return name;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Monster implements Enemy {
 
     @Override
     public int getAttack() {
-        return 0;
+        return attack;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Monster implements Enemy {
         if (amount <= 0) {
             return;
         }
-        health = health - amount;
+        health = Math.max(0, health - amount);
     }
 
     public AttackStrategy getStrategy() {
