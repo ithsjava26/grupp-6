@@ -24,7 +24,7 @@ public class Monster implements Enemy {
     }
 
     @Override
-    public String getname() {
+    public String getName() {
         return "";
     }
 

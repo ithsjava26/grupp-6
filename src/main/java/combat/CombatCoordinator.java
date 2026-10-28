@@ -4,6 +4,7 @@ import common.*;
 /*
 Person C will call this class to create heroes and enemies and to run a fight
 (it does not handle the work it sends the work to your own classes in your package!)
+
 Person A Combat and Character
 
 - write a Hero and Enemy class
