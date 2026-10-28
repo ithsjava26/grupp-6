@@ -1,6 +1,6 @@
 package common;
 
-public enum Itemtype {
+public enum ItemType {
     WEAPON,
     ARMOR,
     POTION
