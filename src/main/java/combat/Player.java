@@ -40,6 +40,9 @@ public class Player implements Hero {
         if (amount <= 0) {
             return;
         }
+        if (gold > Integer.MAX_VALUE - amount) {
+            gold = Integer.MAX_VALUE;
+        } else
         gold += amount;
     }
 
@@ -57,7 +60,10 @@ public class Player implements Hero {
         if (amount <= 0) {
             return;
         }
-        health = Math.min(maxHealth, health + amount);
+        if (amount >= maxHealth - health) {
+            health = MAX_HEALTH;
+        } else
+            health += amount;
     }
 
     @Override

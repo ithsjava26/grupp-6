@@ -11,7 +11,7 @@ public interface AttackStrategy {
     double getDamageMultiplier(Fighter attacker, Fighter defender);
 
     default String getMessage(Fighter attacker) {
-        return attacker.getMaxHealth() + "used" + getName() + "!";
+        return attacker.getName() + "used" + getName() + "!";
     }
 
     default String getMissMessage(Fighter attacker) {

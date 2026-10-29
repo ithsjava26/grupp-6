@@ -20,7 +20,7 @@ public class Monster implements Enemy {
                    AttackStrategy strategy, int health) {
         this.name = name;
         this.maxHealth = maxHealth;
-        this.health = health;
+        this.health = Math.max(0, Math.min(health, maxHealth));
         this.attack = attack;
         this.boss = boss;
         this.reward = reward;
