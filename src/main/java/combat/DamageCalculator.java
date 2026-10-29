@@ -9,7 +9,7 @@ import java.util.Optional;
 public class DamageCalculator {
     public static final int MIN_DAMAGE = 1;
 
-    public int getWeaponBonus(Fighter fighter) {
+    public static int getWeaponBonus(Fighter fighter) {
         if (fighter instanceof Hero hero && hero.getInventory() != null) {
             Optional<Item> weapon = hero.getInventory().getEquippedWeapon();
             if (weapon.isPresent()) {
@@ -19,7 +19,7 @@ public class DamageCalculator {
         return 0;
     }
 
-    public int getDefenseBonus(Fighter fighter) {
+    public static int getDefenseBonus(Fighter fighter) {
         if (fighter instanceof Hero hero && hero.getInventory() != null) {
             Optional<Item> armor = hero.getInventory().getEquippedArmor();
             if (armor.isPresent()) {
@@ -29,7 +29,7 @@ public class DamageCalculator {
         return 0;
     }
 
-    public int calculate(AttackStrategy strategy, Fighter attacker, Fighter defender) {
+    public static int calculate(AttackStrategy strategy, Fighter attacker, Fighter defender) {
         double multipier = strategy.getDamageMultiplier(attacker, defender);
         int damage = (int) Math.round(attacker.getAttack() * multipier);
         damage = damage + getWeaponBonus(attacker);
