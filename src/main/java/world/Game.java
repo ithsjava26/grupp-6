@@ -5,6 +5,7 @@ import common.FighterInfo;
 import common.Hero;
 import common.Inventory;
 import common.ShopInfo;
+import common.GameLog;
 
 /*
 The main logic. It shows the menu and controls the flow of the game, start to end.
@@ -20,6 +21,7 @@ public class Game {
     private final FighterInfo fighter;
     private final ShopInfo shop;
     private final ConsoleUI ui = new ConsoleUI();
+    private final GameLog log = new GameLog();
 
     public Game(FighterInfo fighter, ShopInfo shop) {
         this.fighter = fighter;
@@ -61,7 +63,7 @@ public class Game {
             Hero hero = fighter.createNewHero(name, inventory);
             ui.showStatus(hero);
 
-            Dungeon dungeon = new Dungeon(fighter, ui);
+            Dungeon dungeon = new Dungeon(fighter, ui, log);
             dungeon.run(hero, difficulty);
         } catch (UnsupportedOperationException e) {
             IO.println("Waiting for modules, change later");
