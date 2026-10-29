@@ -3,6 +3,8 @@ package world;
 import common.Difficulty;
 import common.FighterInfo;
 import common.ShopInfo;
+import common.Hero;
+import common.Inventory;
 
 /*
 The main logic. It shows the menu and controls the flow of the game, start to end.
@@ -17,6 +19,7 @@ Person C
 public class Game {
     private final FighterInfo fighter;
     private final ShopInfo shop;
+    private final ConsoleUI ui = new ConsoleUI();
 
     public Game(FighterInfo fighter, ShopInfo shop) {
         this.fighter = fighter;
@@ -57,7 +60,13 @@ public class Game {
 
         IO.println("Welcome, " + name + "! Difficulty: " + difficulty);
 
-        // Next step: create the inventory and hero, then start the rooms.
+        try {
+            Inventory inventory = shop.createInventory();
+            Hero hero = fighter.createNewHero(name, inventory);
+            ui.showStatus(hero);
+        } catch (UnsupportedOperationException e) {
+            IO.println("Waiting for modules, change later");
+        }
     }
 
     private String askForName() {
