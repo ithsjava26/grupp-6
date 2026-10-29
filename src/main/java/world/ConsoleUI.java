@@ -2,12 +2,35 @@ package world;
 
 import common.Difficulty;
 import common.Hero;
+import common.Enemy;
 
 public class ConsoleUI {
 
     public void showStatus(Hero hero) {
         IO.println(hero.getName() + " - HP: " + hero.getHealth() + "/" + hero.getMaxHealth() +
                 " - Gold: " + hero.getGold());
+    }
+
+    public void showRoom(int room, int totalRooms) {
+        IO.println();
+        IO.println("--- Room " + room + " of " + totalRooms + " ---");
+    }
+
+    public void showEnemy(Enemy enemy) {
+        String title = enemy.isBoss() ? "BOSS " : "";
+        IO.println("A wild " + title + enemy.getName() + " appears!");
+        IO.println("HP: " + enemy.getHealth() + "/" + enemy.getMaxHealth() +
+                " - Attack: " + enemy.getAttack());
+    }
+
+    public void showGameOver() {
+        IO.println();
+        IO.println("You have fallen. GAME OVER.");
+    }
+
+    public void showVictory() {
+        IO.println();
+        IO.println("You cleared the dungeon. VICTORY!");
     }
 
     public void showMainMenu() {

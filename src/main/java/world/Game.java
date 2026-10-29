@@ -56,6 +56,9 @@ public class Game {
             Inventory inventory = shop.createInventory();
             Hero hero = fighter.createNewHero(name, inventory);
             ui.showStatus(hero);
+
+            Dungeon dungeon = new Dungeon(fighter, ui);
+            dungeon.run(hero, difficulty);
         } catch (UnsupportedOperationException e) {
             IO.println("Waiting for modules, change later");
         }
