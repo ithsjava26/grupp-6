@@ -17,11 +17,10 @@ public class SpecialAttack implements AttackStrategy {
     }
 
     @Override
-    public int calculateDamage(Fighter attacker, Fighter defender) {
-        int damage = attacker.getAttack();
+    public double getDamageMultiplier(Fighter attacker, Fighter defender) {
         if (defender.getHealth() <= defender.getMaxHealth() * FINISH_LIMIT) {
-            damage = damage * FINISH_MULTIPLIER;
+            return FINISH_MULTIPLIER;
         }
-        return damage;
+        return 1.0;
     }
 }

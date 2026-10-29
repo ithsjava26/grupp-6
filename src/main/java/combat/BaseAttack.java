@@ -3,6 +3,8 @@ package combat;
 import common.Fighter;
 
 public class BaseAttack implements AttackStrategy {
+    private static final double DAMAGE_FACTOR = 1.0;
+
     @Override
     public String getName() {
         return "Base Attack";
@@ -14,7 +16,7 @@ public class BaseAttack implements AttackStrategy {
     }
 
     @Override
-    public int calculateDamage(Fighter attacker, Fighter defender) {
-        return attacker.getAttack();
+    public double getDamageMultiplier(Fighter attacker, Fighter defender) {
+        return DAMAGE_FACTOR;
     }
 }

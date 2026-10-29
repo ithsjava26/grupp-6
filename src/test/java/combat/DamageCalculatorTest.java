@@ -1,0 +1,6 @@
+package combat;
+
+class DamageCalculatorTest {
+
+
+}

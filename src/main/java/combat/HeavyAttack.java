@@ -17,7 +17,7 @@ public class HeavyAttack implements AttackStrategy {
     }
 
     @Override
-    public int calculateDamage(Fighter attacker, Fighter defender) {
-        return (int) Math.round(attacker.getAttack() * DAMAGE_FACTOR);
+    public double getDamageMultiplier(Fighter attacker, Fighter defender) {
+        return DAMAGE_FACTOR;
     }
 }

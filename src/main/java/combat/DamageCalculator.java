@@ -30,7 +30,8 @@ public class DamageCalculator {
     }
 
     public int calculate(AttackStrategy strategy, Fighter attacker, Fighter defender) {
-        int damage = strategy.calculateDamage(attacker, defender);
+        double multipier = strategy.getDamageMultiplier(attacker, defender);
+        int damage = (int) Math.round(attacker.getAttack() * multipier);
         damage = damage + getWeaponBonus(attacker);
         damage = damage - getDefenseBonus(defender);
         return Math.max(MIN_DAMAGE, damage);

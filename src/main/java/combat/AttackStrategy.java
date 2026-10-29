@@ -8,7 +8,7 @@ public interface AttackStrategy {
 
     String getDescription();
 
-    int calculateDamage(Fighter attacker, Fighter defender);
+    double getDamageMultiplier(Fighter attacker, Fighter defender);
 
     default String getMessage(Fighter attacker) {
         return attacker.getMaxHealth() + "used" + getName() + "!";
