@@ -7,7 +7,7 @@ public record Potion(String name, int level, int healAmount) implements Item {
 
     public Potion {
         if (healAmount < 1) {
-            throw new IllegalArgumentException("Heal amount must more than 0");
+            throw new IllegalArgumentException("Heal amount must be more than 0");
         }
     }
 
