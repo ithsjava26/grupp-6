@@ -2,6 +2,7 @@ package combat;
 
 import common.Fighter;
 
+//TODO: DamageCalculation should also include dmg of the best weapon
 public class HeavyAttack implements AttackStrategy {
     private static final double DAMAGE_FACTOR = 1.5;
 

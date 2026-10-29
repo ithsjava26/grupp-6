@@ -1,6 +1,10 @@
 package combat;
 
 import common.Enemy;
+/*TODO: Write a EnemyFactory, including different enemies,
+   boss interval, (Give the boss maybe a speacial attack with a low chance),
+ */
+
 
 public class Monster implements Enemy {
 
