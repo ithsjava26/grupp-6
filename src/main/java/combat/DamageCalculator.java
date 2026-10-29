@@ -19,5 +19,13 @@ public class DamageCalculator {
         return 0;
     }
 
-
+    public int getDefenseBonus(Fighter fighter) {
+        if (fighter instanceof Hero hero && hero.getInventory() != null) {
+            Optional<Item> armor = hero.getInventory().getEquippedArmor();
+            if (armor.isPresent()) {
+                return armor.get().defenseBonus();
+            }
+        }
+        return 0;
+    }
 }
