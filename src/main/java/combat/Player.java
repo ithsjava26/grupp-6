@@ -61,7 +61,7 @@ public class Player implements Hero {
             return;
         }
         if (amount >= maxHealth - health) {
-            health = MAX_HEALTH;
+            health = maxHealth;
         } else
             health += amount;
     }
