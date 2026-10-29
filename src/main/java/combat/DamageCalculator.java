@@ -28,4 +28,12 @@ public class DamageCalculator {
         }
         return 0;
     }
+
+    public int calculate(AttackStrategy strategy, Fighter attacker, Fighter defender) {
+        int damage = strategy.calculateDamage(attacker, defender);
+        damage = damage + getWeaponBonus(attacker);
+        damage = damage - getDefenseBonus(defender);
+        return Math.max(MIN_DAMAGE, damage);
+    }
+
 }
