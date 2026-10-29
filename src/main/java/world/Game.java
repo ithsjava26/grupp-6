@@ -32,7 +32,11 @@ public class Game {
         boolean running = true;
         while (running) {
             ui.showMainMenu();
-            String choice = IO.readln("Choose: ").trim();
+            String input = IO.readln("Choose: ");
+            if (input == null) {
+                break;
+            }
+            String choice = input.trim();
 
             switch (choice) {
                 case "1" -> newGame();
