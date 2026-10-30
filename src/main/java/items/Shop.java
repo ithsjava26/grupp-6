@@ -18,11 +18,11 @@ Person B: Items and Inventory
  */
 
 public class Shop implements ShopInfo {
+
     @Override
     public Inventory createInventory() {
-        throw new UnsupportedOperationException("TODO -> Person B");
+        return new HeroInventory();
     }
-
     @Override
     public List<ShopOffer> generateOffers(int roomNumber) {
         throw new UnsupportedOperationException("TODO -> Person B");
