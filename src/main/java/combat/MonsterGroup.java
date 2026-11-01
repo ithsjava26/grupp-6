@@ -30,29 +30,23 @@ public class MonsterGroup implements Enemy {
 
     @Override
     public int getReward() {
-        int total = 0;
-        for (Monster monster : monsters) {
-            total += monster.getReward();
-        }
-        return total;
+        return monsters.stream()
+                .mapToInt(Monster::getReward)
+                .sum();
     }
 
     @Override
     public int getHealth() {
-        int total = 0;
-        for (Monster monster : monsters) {
-            total += monster.getHealth();
-        }
-        return total;
+        return monsters.stream()
+                .mapToInt(Monster::getHealth)
+                .sum();
     }
 
     @Override
     public int getMaxHealth() {
-        int total = 0;
-        for (Monster monster : monsters) {
-            total += monster.getMaxHealth();
-        }
-        return total;
+        return monsters.stream()
+                .mapToInt(Monster::getMaxHealth)
+                .sum();
     }
 
     @Override
@@ -65,12 +59,10 @@ public class MonsterGroup implements Enemy {
     }
 
     private Monster getCurrentMonster() {
-        for (Monster monster : monsters) {
-            if (monster.isAlive()) {
-                return monster;
-            }
-        }
-        return null;
+        return monsters.stream()
+                .filter(Monster::isAlive)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
