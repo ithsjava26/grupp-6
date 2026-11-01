@@ -3,6 +3,8 @@ package combat;
 import common.Difficulty;
 import common.Enemy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -34,15 +36,51 @@ public class EnemyFactory {
         }
         Objects.requireNonNull(difficulty, "Difficulty cannot be null!");
 
-        boolean isBoss = roomNumber >= BOSS_ROOM;
-        Layout layout;
-        if (isBoss) {
-            layout = BOSS;
-        } else {
-            layout = SMALL_MONSTER[RANDOM.nextInt(SMALL_MONSTER.length)];
+        if (roomNumber >= BOSS_ROOM) {
+            return create(BOSS, difficulty, true);
         }
+
+        int count = randomMonsterCount(roomNumber);
+        List<Monster> monsters = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Layout layout = SMALL_MONSTER[RANDOM.nextInt(SMALL_MONSTER.length)];
+            monsters.add(create(layout, difficulty, false));
+        }
+        return new Monster(); //TODO: Create an extra class for saving and creating a group out of Monster.
         //TODO: depending on what room more small enemies appear,
         // create Bossattack and heavy attack for monster
-        return new Monster(layout.name, layout.health, layout.attack, isBoss, layout.reward, layout.strategy, layout.health);
     }
+
+    static int minMonster(int roomNumber) {
+        return roomNumber + 1;
+    }
+
+    static int maxMonster(int roomNumber) {
+        return roomNumber * 2;
+    }
+
+    private static int randomMonsterCount(int roomNumber) {
+        int min = minMonster(roomNumber);
+        int max = maxMonster(roomNumber);
+        return min + RANDOM.nextInt(max - min + 1);
+    }
+
+    private static Monster create(Layout layout, Difficulty difficulty, boolean isBoss) {
+        int health = scale(layout.health(), difficulty);
+        int attack = scale(layout.attack(), difficulty);
+        int reward = scale(layout.reward(), difficulty);
+
+        return new Monster(layout.name(), health, attack, isBoss, reward, layout.strategy(), health);
+    }
+
+    static int scale(int baseValue, Difficulty difficulty) {
+        double difficultFactor = switch (difficulty) {
+            case EASY -> 0.8;
+            case NORMAL -> 1.0;
+            case HARD -> 1.2;
+        };
+        return (int) Math.round(difficultFactor * baseValue);
+    }
+
+
 }
