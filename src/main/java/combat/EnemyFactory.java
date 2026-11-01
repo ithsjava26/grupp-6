@@ -42,7 +42,7 @@ public class EnemyFactory {
             layout = SMALL_MONSTER[RANDOM.nextInt(SMALL_MONSTER.length)];
         }
         //TODO: depending on what room more small enemies appear,
-        // create Bossattack and heavy attack for monster,
+        // create Bossattack and heavy attack for monster
         return new Monster(layout.name, layout.health, layout.attack, isBoss, layout.reward, layout.strategy, layout.health);
     }
 }
