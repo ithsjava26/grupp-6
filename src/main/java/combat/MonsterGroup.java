@@ -8,7 +8,7 @@ public class MonsterGroup implements Enemy {
     private final List<Monster> monsters;
 
     public MonsterGroup(List<Monster> monsters) {
-        if (monsters == null) {
+        if (monsters == null || monsters.isEmpty()) {
             throw new IllegalArgumentException("A group needs atleast one Monster");
         }
         this.monsters = List.copyOf(monsters); //own copy so nothing outside of this can change it
