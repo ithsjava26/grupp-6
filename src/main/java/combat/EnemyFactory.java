@@ -15,7 +15,6 @@ public class EnemyFactory {
     private record Layout(String name, int health, int attack, int reward, AttackStrategy strategy) {
     }
 
-    //TODO: Create different attacks for different Monsters (like basic, heavy and...)
     private static final Layout[] SMALL_MONSTER = {
             new Layout("Goblin", 15, 2, 1, new MonsterAttack()),
             new Layout("Night crawler", 30, 10, 6, new MonsterAttack()),
