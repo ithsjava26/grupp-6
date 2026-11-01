@@ -35,7 +35,18 @@ public class CombatCoordinator implements FighterInfo {
 
     @Override
     public boolean fight(Hero hero, Enemy enemy) {
-        throw new UnsupportedOperationException("TO DO -> Person A");
+        if (enemy instanceof MonsterGroup group) {
+            return fightGroup(hero, group); //if its a group then fight monster one by one
+        }
+        return fightOne(hero, enemy);//if its not a group fight only one(Boss)
+    }
+
+    private boolean fightGroup(Hero hero, MonsterGroup group) {
+        return false;
+    }
+
+    private boolean fightOne(Hero hero, Enemy enemy) {
+        return false;
     }
 
     //TODO: HeroTurn
