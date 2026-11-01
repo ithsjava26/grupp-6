@@ -28,10 +28,9 @@ public class CombatCoordinator implements FighterInfo {
                 Player.START_ATTACK, gold, inventory);
     }
 
-    //TODO: Write EnemyFactory class with different eneies that can appear
     @Override
     public Enemy createEnemy(int roomNumber, Difficulty difficulty) {
-        throw new UnsupportedOperationException("TODO -> Person A");
+        return EnemyFactory.createEnemy(roomNumber, difficulty);
     }
 
     //TODO: Write fight loop Hero turn/ Enemy turn till one of them dies
