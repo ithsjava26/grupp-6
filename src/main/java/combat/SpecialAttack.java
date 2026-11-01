@@ -13,7 +13,18 @@ public class SpecialAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "Deals double damage against a target with 20% health or less";
+        return "You gather all your Strength, waiting for the perfect opportunity to unleash " +
+                "your full power.";
+    }
+
+    public String getAttackMessage(Fighter defender) {
+        if (defender.getHealth() <= defender.getMaxHealth() * FINISH_LIMIT) {
+            return "You sense your enemy's weakness and seize the opportunity. " +
+                    "Gathering all your strength, you unleash a final devastating blow.";
+        }
+        return "You gather all your strength and unleash a mighty blow, but your enemy is still " +
+                "to strong. They withstand the full force behind your attack, leaving only a normal strike " +
+                "breaking through their skin.";
     }
 
     @Override

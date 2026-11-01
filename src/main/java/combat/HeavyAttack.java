@@ -13,7 +13,8 @@ public class HeavyAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "A powerfull blow that deals 150% of the Base Dmg.";
+        return "You gather your strenght before unleashing a powerfull blow, " +
+                "putting all your force into one hit.";
     }
 
     @Override

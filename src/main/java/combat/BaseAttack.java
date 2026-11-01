@@ -7,12 +7,13 @@ public class BaseAttack implements AttackStrategy {
 
     @Override
     public String getName() {
-        return "Base Attack";
+        return "Basic Attack";
     }
 
     @Override
     public String getDescription() {
-        return "A plain hit with the attackers base damage";
+        return "You launch a swift attack against your enemy, attacking with speed and " +
+                "precision";
     }
 
     @Override
