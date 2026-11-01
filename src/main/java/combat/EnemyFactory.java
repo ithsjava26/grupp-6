@@ -46,7 +46,7 @@ public class EnemyFactory {
             Layout layout = SMALL_MONSTER[RANDOM.nextInt(SMALL_MONSTER.length)];
             monsters.add(create(layout, difficulty, false));
         }
-        return new Monster(); //TODO: Create an extra class for saving and creating a group out of Monster.
+        return new MonsterGroup(monsters); //TODO: Create an extra class for saving and creating a group out of Monster.
         //TODO: depending on what room more small enemies appear,
         // create Bossattack and heavy attack for monster
     }
