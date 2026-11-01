@@ -13,7 +13,7 @@ public class HeavyAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "You gather your strenght before unleashing a powerfull blow, " +
+        return "You gather your strength before unleashing a powerful blow, " +
                 "putting all your force into one hit.";
     }
 

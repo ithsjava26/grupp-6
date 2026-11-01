@@ -20,7 +20,7 @@ public class MonsterGroup implements Enemy {
 
     @Override
     public String getName() {
-        return "A Pack of " + monsters.size() + "monsters appear!";
+        return "A Pack of " + monsters.size() + " monsters appear!";
     }
 
     @Override
