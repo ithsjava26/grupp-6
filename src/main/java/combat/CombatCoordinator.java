@@ -33,7 +33,7 @@ public class CombatCoordinator implements FighterInfo {
         return EnemyFactory.createEnemy(roomNumber, difficulty);
     }
 
-    //TODO: Write fight loop Hero turn/ Enemy turn till one of them dies
+    //TODO: Write fight loop Hero turn/ Enemy turn till one of them dies, and Hero Menu.
     @Override
     public boolean fight(Hero hero, Enemy enemy) {
         throw new UnsupportedOperationException("TO DO -> Person A");
