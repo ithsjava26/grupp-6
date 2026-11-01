@@ -1,6 +1,8 @@
 package combat;
 
 import common.*;
+
+import java.util.List;
 /*
 Person C will call this class to create heroes and enemies and to run a fight
 (it does not handle the work it sends the work to your own classes in your package!)
@@ -42,7 +44,18 @@ public class CombatCoordinator implements FighterInfo {
     }
 
     private boolean fightGroup(Hero hero, MonsterGroup group) {
-        return false;
+        List<Monster> monsters = group.getMonsters();
+
+        int number = 0;
+        for (Monster monster : monsters) {
+            number++;
+            IO.println("\n===Enemy " + number + "of " + monsters.size() + " ===");
+            if (!fightOne(hero, monster)) {
+                return false; //Hero lost
+            }
+        }
+        IO.println("\nYou defeated all " + monsters.size() + "monsters!!");
+        return true;//Hero won
     }
 
     private boolean fightOne(Hero hero, Enemy enemy) {
