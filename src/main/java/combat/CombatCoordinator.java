@@ -103,17 +103,14 @@ public class CombatCoordinator implements FighterInfo {
             switch (choice.trim()) {
                 case "1" -> {
                     attack(hero, enemy, baseAttack);
-                    IO.println(baseAttack.getMessage(hero, enemy));
                     turnUsed = true;
                 }
                 case "2" -> {
                     attack(hero, enemy, heavyAttack);
-                    IO.println(heavyAttack.getMessage(hero, enemy));
                     turnUsed = true;
                 }
                 case "3" -> {
                     attack(hero, enemy, specialAttack);
-                    IO.println(specialAttack.getMessage(hero, enemy));
                     turnUsed = true;
                 }
                 case "4" -> {
@@ -180,11 +177,12 @@ public class CombatCoordinator implements FighterInfo {
         defender.takeDamage(damage);
 
         String text = strategy.getMessage(attacker, defender) + "\n" + defender.getName()
-                + " takes " + damage + "damage!";
+                + " takes " + damage + " damage!";
         int defense = DamageCalculator.getDefenseBonus(defender);
         if (defense > 0) {
             text = text + "your armor blocked " + defense + "!";
         }
+        IO.println(text);
     }
 
     private void printStatus(Hero hero, Enemy enemy) {
