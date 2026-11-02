@@ -9,6 +9,8 @@ import common.GameLog;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import items.ItemFactory;
+import java.nio.file.Files;
 
 /*
 The main logic. It shows the menu and controls the flow of the game, start to end.
@@ -47,7 +49,7 @@ public class Game {
 
             switch (choice) {
                 case "1" -> newGame();
-                case "2" -> IO.println("Load game is coming soon.");
+                case "2" -> loadGame();
                 case "3" -> {
                     IO.println("Goodbye!");
                     running = false;
@@ -131,6 +133,37 @@ public class Game {
             log.onEvent(hero.getName() + " saved the game");
         } catch (IOException e) {
             IO.println("Could not save the game: " + e.getMessage());
+        }
+    }
+
+    private void loadGame() {
+        if (!Files.exists(SAVE_FILE)) {
+            IO.println("No saved game found.");
+            return;
+        }
+
+        SaveData data;
+        try {
+            data = saveManager.load(SAVE_FILE);
+        } catch (IOException e) {
+            IO.println("Could not load the game: " + e.getMessage());
+            return;
+        }
+
+        try {
+            Inventory inventory = shop.createInventory();
+            for (SaveData.SavedItem saved : data.items()) {
+                inventory.add(ItemFactory.create(saved.type(), saved.level()));
+            }
+            Hero hero = fighter.loadHero(data.name(), data.health(), data.gold(), inventory);
+
+            log.onEvent(hero.getName() + " loaded the game");
+            IO.println("Game loaded.");
+            ui.showStatus(hero);
+
+            playGame(hero, data.difficulty(), data.room());
+        } catch (UnsupportedOperationException e) {
+            IO.println("Waiting for modules, change later");
         }
     }
 }
