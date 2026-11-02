@@ -90,13 +90,32 @@ public class CombatCoordinator implements FighterInfo {
                 choice = "1";
             }
             switch (choice.trim()) {
-                case "1" -> turnUsed = true;
-                case "2" -> turnUsed = true;
-                case "3" -> turnUsed = true;//Write attack method
+                case "1" -> {
+                    attack(hero, enemy, baseAttack);
+                    IO.println(baseAttack.getDescription());
+                    turnUsed = true;
+                }
+                case "2" -> {
+                    attack(hero, enemy, heavyAttack);
+                    IO.println(heavyAttack.getDescription());
+                    turnUsed = true;
+                }
+                case "3" -> {
+                    attack(hero, enemy, specialAttack);
+                    IO.println(specialAttack.getMessage(hero));
+                    turnUsed = true;
+                }//Write attack method
 
             }
-
         }
+    }
+
+    private void PrintHeroMenu(Hero hero) {
+        IO.println("===Your turn=== " +
+                "\n1. " + baseAttack.getName()
+                + "\n2. " + heavyAttack.getName()
+                + "\n3. " + specialAttack.getName()
+        );
     }
 
     private void enemyTurn(Hero hero, Enemy enemy) {
