@@ -6,6 +6,9 @@ import common.Hero;
 import common.Inventory;
 import common.ShopInfo;
 import common.GameLog;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 /*
 The main logic. It shows the menu and controls the flow of the game, start to end.
@@ -22,6 +25,8 @@ public class Game {
     private final ShopInfo shop;
     private final ConsoleUI ui = new ConsoleUI();
     private final GameLog log = new GameLog();
+    private static final Path SAVE_FILE = Path.of("savegame.txt");
+    private final SaveManager saveManager = new SaveManager();
 
     public Game(FighterInfo fighter, ShopInfo shop) {
         this.fighter = fighter;
@@ -42,7 +47,7 @@ public class Game {
 
             switch (choice) {
                 case "1" -> newGame();
-                case "2" -> IO.println("Load game is coming soon.");
+                case "2" -> loadGame();
                 case "3" -> {
                     IO.println("Goodbye!");
                     running = false;
@@ -63,8 +68,90 @@ public class Game {
             Hero hero = fighter.createNewHero(name, inventory);
             ui.showStatus(hero);
 
-            Dungeon dungeon = new Dungeon(fighter, ui, log);
-            dungeon.run(hero, difficulty);
+            playGame(hero, difficulty, 1);
+        } catch (UnsupportedOperationException e) {
+            IO.println("Waiting for modules, change later");
+        }
+    }
+
+    private void playGame(Hero hero, Difficulty difficulty, int startRoom) {
+        Dungeon dungeon = new Dungeon(fighter, ui, log);
+
+        for (int room = startRoom; room <= Dungeon.TOTAL_ROOMS; room++) {
+            boolean heroWon = dungeon.playRoom(hero, difficulty, room);
+            if (!heroWon) {
+                return;
+            }
+
+            if (room < Dungeon.TOTAL_ROOMS && !roomMenu(hero, difficulty, room + 1)) {
+                return;
+            }
+        }
+
+        log.onEvent(hero.getName() + " cleared the dungeon");
+        ui.showVictory();
+    }
+
+    // Returns true if the player wants to continue to the next room,
+    // false if the player quits to the main menu
+    private boolean roomMenu(Hero hero, Difficulty difficulty, int nextRoom) {
+        while (true) {
+            ui.showRoomMenu(nextRoom);
+            String input = IO.readln("Choose: ");
+            if (input == null) {
+                return false;
+            }
+
+            switch (input.trim()) {
+                case "1" -> {
+                    return true;
+                }
+                case "2" -> IO.println("Shop is coming soon.");
+                case "3" -> IO.println("Equipment view is coming soon.");
+                case "4" -> IO.println("Using potions is coming soon.");
+                case "5" -> saveGame(hero, difficulty, nextRoom);
+                case "6" -> {
+                    return false;
+                }
+                default -> IO.println("Not a valid choice. Type 1-6.");
+            }
+        }
+    }
+
+    private void saveGame(Hero hero, Difficulty difficulty, int nextRoom) {
+        SaveData data = SaveData.from(hero, difficulty, nextRoom);
+
+        try {
+            saveManager.save(SAVE_FILE, data);
+            IO.println("Game saved.");
+            log.onEvent(hero.getName() + " saved the game");
+        } catch (IOException e) {
+            IO.println("Could not save the game: " + e.getMessage());
+        }
+    }
+
+    private void loadGame() {
+        if (!Files.exists(SAVE_FILE)) {
+            IO.println("No saved game found.");
+            return;
+        }
+
+        SaveData data;
+        try {
+            data = saveManager.load(SAVE_FILE);
+        } catch (IOException e) {
+            IO.println("Could not load the game: " + e.getMessage());
+            return;
+        }
+
+        try {
+            Hero hero = data.createHero(fighter, shop);
+
+            log.onEvent(hero.getName() + " loaded the game");
+            IO.println("Game loaded.");
+            ui.showStatus(hero);
+
+            playGame(hero, data.difficulty(), data.room());
         } catch (UnsupportedOperationException e) {
             IO.println("Waiting for modules, change later");
         }
