@@ -77,9 +77,39 @@ public class Game {
             if (!heroWon) {
                 return;
             }
+
+            if (room < Dungeon.TOTAL_ROOMS && !roomMenu(hero, difficulty, room + 1)) {
+                return;
+            }
         }
 
         log.onEvent(hero.getName() + " cleared the dungeon");
         ui.showVictory();
+    }
+
+    // Returns true if the player wants to continue to the next room,
+    // false if the player quits to the main menu
+    private boolean roomMenu(Hero hero, Difficulty difficulty, int nextRoom) {
+        while (true) {
+            ui.showRoomMenu(nextRoom);
+            String input = IO.readln("Choose: ");
+            if (input == null) {
+                return false;
+            }
+
+            switch (input.trim()) {
+                case "1" -> {
+                    return true;
+                }
+                case "2" -> IO.println("Shop is coming soon.");
+                case "3" -> IO.println("Equipment view is coming soon.");
+                case "4" -> IO.println("Using potions is coming soon.");
+                case "5" -> IO.println("Saving is coming soon.");
+                case "6" -> {
+                    return false;
+                }
+                default -> IO.println("Not a valid choice. Type 1-6.");
+            }
+        }
     }
 }

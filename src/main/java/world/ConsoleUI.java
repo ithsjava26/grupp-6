@@ -41,6 +41,17 @@ public class ConsoleUI {
         IO.println("3. Quit");
     }
 
+    public void showRoomMenu(int nextRoom) {
+        IO.println();
+        IO.println("=== BEFORE ROOM " + nextRoom + " ===");
+        IO.println("1. Continue to room " + nextRoom);
+        IO.println("2. Shop");
+        IO.println("3. Show equipment");
+        IO.println("4. Use potion");
+        IO.println("5. Save game");
+        IO.println("6. Quit to main menu");
+    }
+
     public String askForName() {
         while (true) {
             String name = IO.readln("What is your hero's name? ").trim();
