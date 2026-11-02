@@ -12,6 +12,11 @@ public class BaseAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
+        return "A quick strike that deals standart damage to your enemy.";
+    }
+
+    @Override
+    public String getMessage(Fighter attacker, Fighter defender) {
         return "You launch a swift attack against your enemy, attacking with speed and " +
                 "precision";
     }
@@ -20,4 +25,5 @@ public class BaseAttack implements AttackStrategy {
     public double getDamageMultiplier(Fighter attacker, Fighter defender) {
         return DAMAGE_FACTOR;
     }
+
 }

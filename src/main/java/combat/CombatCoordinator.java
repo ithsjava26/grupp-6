@@ -54,11 +54,12 @@ public class CombatCoordinator implements FighterInfo {
         int number = 0;
         for (Monster monster : monsters) {
             number++;
-            IO.println("\n===Enemy " + number + " of " + monsters.size() + " ===");
+            IO.println("\n---Enemy " + number + " of " + monsters.size() + " ---");
             if (!fightOne(hero, monster)) {
                 return false; //Hero lost
             }
         }
+
         return true;//Hero won
     }
 
@@ -66,7 +67,7 @@ public class CombatCoordinator implements FighterInfo {
         IO.println("\nEnemies in this Room: ");
         IntStream.range(0, monsters.size())
                 .forEach(i -> IO.println(" " + (i + 1) + ". "
-                        + monsters.get(i).getName()
+                        + "%-20s".formatted(monsters.get(i).getName())
                         + " (HP " + monsters.get(i).getHealth()
                         + ", ATK " + monsters.get(i).getAttack() + ")"));
     }
@@ -83,6 +84,7 @@ public class CombatCoordinator implements FighterInfo {
             }
         }
         if (hero.isAlive()) {
+            IO.println("\nYou defeated " + enemy.getName() + "!");
             return true;
         } else {
             return false;
@@ -101,17 +103,17 @@ public class CombatCoordinator implements FighterInfo {
             switch (choice.trim()) {
                 case "1" -> {
                     attack(hero, enemy, baseAttack);
-                    IO.println(baseAttack.getDescription());
+                    IO.println(baseAttack.getMessage(hero, enemy));
                     turnUsed = true;
                 }
                 case "2" -> {
                     attack(hero, enemy, heavyAttack);
-                    IO.println(heavyAttack.getDescription());
+                    IO.println(heavyAttack.getMessage(hero, enemy));
                     turnUsed = true;
                 }
                 case "3" -> {
                     attack(hero, enemy, specialAttack);
-                    IO.println(specialAttack.getMessage(hero));
+                    IO.println(specialAttack.getMessage(hero, enemy));
                     turnUsed = true;
                 }
                 case "4" -> {
@@ -150,7 +152,7 @@ public class CombatCoordinator implements FighterInfo {
     }
 
     private void printHeroMenu(Hero hero) {
-        IO.println("===Your turn=== " +
+        IO.println("---Your turn---" +
                 "\n1. " + baseAttack.getName()
                 + "\n2. " + heavyAttack.getName()
                 + "\n3. " + specialAttack.getName()
@@ -177,13 +179,12 @@ public class CombatCoordinator implements FighterInfo {
         int damage = DamageCalculator.calculate(strategy, attacker, defender);
         defender.takeDamage(damage);
 
-        String text = strategy.getMessage(attacker) + " " + defender.getName()
-                + " takes " + damage + "damage";
+        String text = strategy.getMessage(attacker, defender) + "\n" + defender.getName()
+                + " takes " + damage + "damage!";
         int defense = DamageCalculator.getDefenseBonus(defender);
         if (defense > 0) {
-            text = text + "your armor blocked " + defense + "";
+            text = text + "your armor blocked " + defense + "!";
         }
-        IO.println("!");
     }
 
     private void printStatus(Hero hero, Enemy enemy) {

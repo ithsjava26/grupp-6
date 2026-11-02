@@ -13,6 +13,11 @@ public class HeavyAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
+        return "A powerfull attack that deals 50% more damage than the players basic attack";
+    }
+
+    @Override
+    public String getMessage(Fighter attacker, Fighter defender) {
         return "You gather your strength before unleashing a powerful blow, " +
                 "putting all your force into one hit.";
     }
