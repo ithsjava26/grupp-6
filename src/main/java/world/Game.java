@@ -6,6 +6,9 @@ import common.Hero;
 import common.Inventory;
 import common.ShopInfo;
 import common.GameLog;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
 
 /*
 The main logic. It shows the menu and controls the flow of the game, start to end.
@@ -22,6 +25,8 @@ public class Game {
     private final ShopInfo shop;
     private final ConsoleUI ui = new ConsoleUI();
     private final GameLog log = new GameLog();
+    private static final Path SAVE_FILE = Path.of("savegame.txt");
+    private final SaveManager saveManager = new SaveManager();
 
     public Game(FighterInfo fighter, ShopInfo shop) {
         this.fighter = fighter;
@@ -104,12 +109,28 @@ public class Game {
                 case "2" -> IO.println("Shop is coming soon.");
                 case "3" -> IO.println("Equipment view is coming soon.");
                 case "4" -> IO.println("Using potions is coming soon.");
-                case "5" -> IO.println("Saving is coming soon.");
+                case "5" -> saveGame(hero, difficulty, nextRoom);
                 case "6" -> {
                     return false;
                 }
                 default -> IO.println("Not a valid choice. Type 1-6.");
             }
+        }
+    }
+
+    private void saveGame(Hero hero, Difficulty difficulty, int nextRoom) {
+        List<SaveData.SavedItem> items = hero.getInventory().getItems().stream()
+                .map(item -> new SaveData.SavedItem(item.type(), item.level()))
+                .toList();
+        SaveData data = new SaveData(hero.getName(), hero.getHealth(), hero.getGold(),
+                difficulty, nextRoom, items);
+
+        try {
+            saveManager.save(SAVE_FILE, data);
+            IO.println("Game saved.");
+            log.onEvent(hero.getName() + " saved the game");
+        } catch (IOException e) {
+            IO.println("Could not save the game: " + e.getMessage());
         }
     }
 }

@@ -3,8 +3,8 @@ package world;
 import common.Difficulty;
 import common.Enemy;
 import common.FighterInfo;
-import common.Hero;
 import common.GameEventListener;
+import common.Hero;
 
 public class Dungeon {
     public static final int TOTAL_ROOMS = 5;
