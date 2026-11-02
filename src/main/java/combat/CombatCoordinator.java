@@ -72,6 +72,7 @@ public class CombatCoordinator implements FighterInfo {
     }
 
     private boolean fightOne(Hero hero, Enemy enemy) {
+        printStatus(hero, enemy);
         while (hero.isAlive() && enemy.isAlive()) {
             heroTurn(hero, enemy);
             if (enemy.isAlive()) {
@@ -79,6 +80,7 @@ public class CombatCoordinator implements FighterInfo {
             }
             if (hero.isAlive() && enemy.isAlive()) {
                 IO.println("Next Round!");
+                printStatus(hero, enemy);
             }
         }
         if (hero.isAlive()) {
@@ -183,5 +185,16 @@ public class CombatCoordinator implements FighterInfo {
             text = text + "your armor blocked " + defense + "";
         }
         IO.println("!");
+    }
+
+    private void printStatus(Hero hero, Enemy enemy) {
+        int AttackValue = hero.getAttack() + DamageCalculator.getWeaponBonus(hero);
+        int DefenseValue = DamageCalculator.getDefenseBonus(hero);
+
+        IO.println(hero.getName() + ": " + hero.getHealth() + "/" + hero.getMaxHealth()
+                + " HP (ATK " + AttackValue + ", DEF " + DefenseValue + ")"
+                + "\t|\t" + enemy.getName() + ": " + enemy.getHealth() + "/"
+                + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP");
+
     }
 }
