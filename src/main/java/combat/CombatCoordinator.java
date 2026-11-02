@@ -3,6 +3,7 @@ package combat;
 import common.*;
 
 import java.util.List;
+import java.util.stream.IntStream;
 /*
 Person C will call this class to create heroes and enemies and to run a fight
 (it does not handle the work it sends the work to your own classes in your package!)
@@ -48,6 +49,7 @@ public class CombatCoordinator implements FighterInfo {
 
     private boolean fightGroup(Hero hero, MonsterGroup group) {
         List<Monster> monsters = group.getMonsters();
+        printGroup(monsters);
 
         int number = 0;
         for (Monster monster : monsters) {
@@ -58,6 +60,15 @@ public class CombatCoordinator implements FighterInfo {
             }
         }
         return true;//Hero won
+    }
+
+    private void printGroup(List<Monster> monsters) {
+        IO.println("\nEnemies in this Room: ");
+        IntStream.range(0, monsters.size())
+                .forEach(i -> IO.println(" " + (i + 1) + ". "
+                        + monsters.get(i).getName()
+                        + " (HP " + monsters.get(i).getHealth()
+                        + ", ATK " + monsters.get(i).getAttack() + ")"));
     }
 
     private boolean fightOne(Hero hero, Enemy enemy) {
