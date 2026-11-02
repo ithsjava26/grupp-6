@@ -8,8 +8,6 @@ import common.ShopInfo;
 import common.GameLog;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
-import items.ItemFactory;
 import java.nio.file.Files;
 
 /*
@@ -121,11 +119,7 @@ public class Game {
     }
 
     private void saveGame(Hero hero, Difficulty difficulty, int nextRoom) {
-        List<SaveData.SavedItem> items = hero.getInventory().getItems().stream()
-                .map(item -> new SaveData.SavedItem(item.type(), item.level()))
-                .toList();
-        SaveData data = new SaveData(hero.getName(), hero.getHealth(), hero.getGold(),
-                difficulty, nextRoom, items);
+        SaveData data = SaveData.from(hero, difficulty, nextRoom);
 
         try {
             saveManager.save(SAVE_FILE, data);
@@ -151,11 +145,7 @@ public class Game {
         }
 
         try {
-            Inventory inventory = shop.createInventory();
-            for (SaveData.SavedItem saved : data.items()) {
-                inventory.add(ItemFactory.create(saved.type(), saved.level()));
-            }
-            Hero hero = fighter.loadHero(data.name(), data.health(), data.gold(), inventory);
+            Hero hero = data.createHero(fighter, shop);
 
             log.onEvent(hero.getName() + " loaded the game");
             IO.println("Game loaded.");
