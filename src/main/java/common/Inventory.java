@@ -10,6 +10,9 @@ public interface Inventory {
 
     List<Item> getItems();
 
+    // All items of the given type
+    List<Item> getItemsOfType(ItemType type);
+
     // The weapon with the highest attack bonus, or empty if there is none
     Optional<Item> getEquippedWeapon();
 
