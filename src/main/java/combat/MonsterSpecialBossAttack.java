@@ -17,6 +17,11 @@ public class MonsterSpecialBossAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
+        return "A devastating boss attack with a 20% chance to deal double damage";
+    }
+
+    @Override
+    public String getMessage(Fighter attacker, Fighter defender) {
         if (random.nextInt(100) < CHANCE_PERCENT) {
             return "The boss unleashes a masive roar as dark energy gathers around its body," +
                     "before releasing a heavy force that drains the life of your soul in seconds.";

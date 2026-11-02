@@ -12,6 +12,11 @@ public class MonsterAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
+        return "A quick claw attack that deals standart damage to its target";
+    }
+
+    @Override
+    public String getMessage(Fighter attacker, Fighter enemy) {
         return "The creature lunges forward with a frantic hiss, slashing its jagged claws across your skin";
     }
 

@@ -177,10 +177,10 @@ public class CombatCoordinator implements FighterInfo {
         defender.takeDamage(damage);
 
         String text = strategy.getMessage(attacker, defender) + "\n" + defender.getName()
-                + " takes " + damage + " damage!";
+                + " takes " + damage + " damage!" + "\n";
         int defense = DamageCalculator.getDefenseBonus(defender);
         if (defense > 0) {
-            text = text + "your armor blocked " + defense + "!";
+            text = text + "your armor blocked " + defense + "!" + "\n";
         }
         IO.println(text);
     }

@@ -12,6 +12,11 @@ public class MonsterHeavyAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
+        return "A powerfull attack that deals 50% more damage than a standart attack.";
+    }
+
+    @Override
+    public String getMessage(Fighter attacker, Fighter defender) {
         return "The creature lowers its body, before suddendly striking " +
                 "you  with its full weight and razor sharp claws";
     }
