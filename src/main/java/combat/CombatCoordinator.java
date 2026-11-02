@@ -54,7 +54,7 @@ public class CombatCoordinator implements FighterInfo {
         int number = 0;
         for (Monster monster : monsters) {
             number++;
-            IO.println("\n===Enemy " + number + "of " + monsters.size() + " ===");
+            IO.println("\n===Enemy " + number + " of " + monsters.size() + " ===");
             if (!fightOne(hero, monster)) {
                 return false; //Hero lost
             }
@@ -79,7 +79,6 @@ public class CombatCoordinator implements FighterInfo {
                 enemyTurn(hero, enemy);
             }
             if (hero.isAlive() && enemy.isAlive()) {
-                IO.println("Next Round!");
                 printStatus(hero, enemy);
             }
         }
@@ -193,7 +192,7 @@ public class CombatCoordinator implements FighterInfo {
 
         IO.println(hero.getName() + ": " + hero.getHealth() + "/" + hero.getMaxHealth()
                 + " HP (ATK " + AttackValue + ", DEF " + DefenseValue + ")"
-                + "\t|\t" + enemy.getName() + ": " + enemy.getHealth() + "/"
+                + "\t|\t" + enemy.getName() + ": "
                 + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP");
 
     }

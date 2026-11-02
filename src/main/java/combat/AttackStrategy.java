@@ -11,11 +11,11 @@ public interface AttackStrategy {
     double getDamageMultiplier(Fighter attacker, Fighter defender);
 
     default String getMessage(Fighter attacker) {
-        return attacker.getName() + "used" + getName() + "!";
+        return attacker.getName() + " used " + getName() + "!";
     }
 
     default String getMissMessage(Fighter attacker) {
-        return attacker.getName() + "used" + getName() + "but missed!";
+        return attacker.getName() + " used " + getName() + " but missed!";
     }
 
 }
