@@ -143,9 +143,11 @@ public class CombatCoordinator implements FighterInfo {
 
     private void attack(Fighter attacker, Fighter defender, AttackStrategy strategy) {
         int damage = DamageCalculator.calculate(strategy, attacker, defender);
+        String message = strategy.getMessage(attacker, defender);
         defender.takeDamage(damage);
 
-        String text = strategy.getMessage(attacker, defender) + "\n" + defender.getName()
+
+        String text = message + "\n" + defender.getName()
                 + " takes " + damage + " damage!" + "\n";
         int defense = DamageCalculator.getDefenseBonus(defender);
         if (defense > 0) {

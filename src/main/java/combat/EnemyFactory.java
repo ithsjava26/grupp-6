@@ -17,10 +17,10 @@ public class EnemyFactory {
 
     private static final Layout[] SMALL_MONSTER = {
             new Layout("Goblin", 15, 2, 1, new MonsterAttack()),
-            new Layout("Night crawler", 30, 1, 6, new MonsterAttack()),
-            new Layout("Skelleton", 3, 1, 2, new MonsterAttack()),
-            new Layout("Ironhide", 40, 1, 15, new MonsterAttack()),
-            new Layout("Shadowreaper", 10, 1, 10, new MonsterAttack())
+            new Layout("Night crawler", 30, 10, 6, new MonsterAttack()),
+            new Layout("Skelleton", 3, 7, 2, new MonsterAttack()),
+            new Layout("Ironhide", 40, 15, 15, new MonsterAttack()),
+            new Layout("Shadowreaper", 10, 13, 10, new MonsterAttack())
     };
 
     private static final Layout BOSS = new Layout("Warden", 80, 15, 60, new MonsterSpecialBossAttack());
