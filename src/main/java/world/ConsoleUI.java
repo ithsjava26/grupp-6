@@ -18,7 +18,7 @@ public class ConsoleUI {
 
     public void showEnemy(Enemy enemy) {
         String title = enemy.isBoss() ? "BOSS " : "";
-        IO.println("A wild " + title + enemy.getName() + " appears!");
+        IO.println(title + enemy.getName());
         IO.println("HP: " + enemy.getHealth() + "/" + enemy.getMaxHealth() +
                 " - Attack: " + enemy.getAttack());
     }
