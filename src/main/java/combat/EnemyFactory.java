@@ -23,7 +23,7 @@ public class EnemyFactory {
             new Layout("Shadowreaper", 10, 1, 10, new MonsterAttack())
     };
 
-    private static final Layout BOSS = new Layout("Warden", 80, 15, 60, new MonsterAttack());
+    private static final Layout BOSS = new Layout("Warden", 80, 15, 60, new MonsterSpecialBossAttack());
 
     private EnemyFactory() {
     }
