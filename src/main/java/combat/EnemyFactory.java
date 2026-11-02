@@ -18,8 +18,8 @@ public class EnemyFactory {
     private static final Layout[] SMALL_MONSTER = {
             new Layout("Goblin", 15, 2, 1, new MonsterAttack()),
             new Layout("Night crawler", 30, 10, 6, new MonsterAttack()),
-            new Layout("Skelleton", 3, 7, 2, new MonsterAttack()),
-            new Layout("Ironhide", 40, 15, 15, new MonsterAttack()),
+            new Layout("Skelleton", 3, 6, 2, new MonsterAttack()),
+            new Layout("Ironhide", 40, 9, 15, new MonsterAttack()),
             new Layout("Shadowreaper", 10, 13, 10, new MonsterAttack())
     };
 
