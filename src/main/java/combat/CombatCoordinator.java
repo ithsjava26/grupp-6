@@ -92,10 +92,7 @@ public class CombatCoordinator implements FighterInfo {
         boolean turnUsed = false;
 
         while (!turnUsed) {
-            IO.println("===your turn=== " +
-                    "\n1. " + baseAttack.getName() +
-                    "\n2. " + heavyAttack.getName() +
-                    "\n3. " + specialAttack.getName());
+            printHeroMenu(hero);
             String choice = IO.readln("Choose your action: ");
             if (choice == null) {
                 choice = "1";
@@ -121,7 +118,7 @@ public class CombatCoordinator implements FighterInfo {
         }
     }
 
-    private void PrintHeroMenu(Hero hero) {
+    private void printHeroMenu(Hero hero) {
         IO.println("===Your turn=== " +
                 "\n1. " + baseAttack.getName()
                 + "\n2. " + heavyAttack.getName()
