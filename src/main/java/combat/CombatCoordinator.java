@@ -113,47 +113,16 @@ public class CombatCoordinator implements FighterInfo {
                     attack(hero, enemy, specialAttack);
                     turnUsed = true;
                 }
-                case "4" -> {
-                    turnUsed = drinkPotion(hero);
-                }
                 default -> IO.println("Invalid choice, choose between 1-4!");
 
             }
         }
     }
-
-    private boolean drinkPotion(Hero hero) {
-        List<Item> potions = getPotions(hero);
-        if (potions.isEmpty()) {
-            IO.println("You have no Potions to use!");
-            return false;
-        } else if (hero.getHealth() == hero.getMaxHealth()) {
-            IO.println("You are already at full health!");
-            return false;
-        } else {
-            Item potion = potions.getFirst();
-            int healthBefore = hero.getHealth();
-            hero.heal(potion.healAmount());
-            hero.getInventory().remove(potion);
-            IO.println("You drink " + potion.name() + "and recover "
-                    + (hero.getHealth() - healthBefore) + "HP!");
-            return true;
-        }
-    }
-
-    private List<Item> getPotions(Hero hero) {
-        if (hero.getInventory() == null) {
-            return List.of();
-        }
-        return hero.getInventory().getItemsOfType(ItemType.POTION);
-    }
-
     private void printHeroMenu(Hero hero) {
         IO.println("---Your turn---" +
                 "\n1. " + baseAttack.getName()
                 + "\n2. " + heavyAttack.getName()
                 + "\n3. " + specialAttack.getName()
-                + "\n4. Drink Potion to heal!"
         );
     }
 
