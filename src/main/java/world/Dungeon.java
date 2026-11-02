@@ -19,31 +19,25 @@ public class Dungeon {
         this.listener = listener;
     }
 
-    // Returns true if the hero cleared all rooms, false if the hero died
-    public boolean run(Hero hero, Difficulty difficulty) {
-        for (int room = 1; room <= TOTAL_ROOMS; room++) {
-            ui.showRoom(room, TOTAL_ROOMS);
-            listener.onEvent("Room " + room + " started");
+    // Plays one room. Returns true if the hero won, false if the hero died
+    public boolean playRoom(Hero hero, Difficulty difficulty, int room) {
+        ui.showRoom(room, TOTAL_ROOMS);
+        listener.onEvent("Room " + room + " started");
 
-            Enemy enemy = fighter.createEnemy(room, difficulty);
-            ui.showEnemy(enemy);
+        Enemy enemy = fighter.createEnemy(room, difficulty);
+        ui.showEnemy(enemy);
 
-            boolean heroWon = fighter.fight(hero, enemy);
-            if (!heroWon) {
-                listener.onEvent(hero.getName() + " was defeated by " + enemy.getName());
-                ui.showGameOver();
-                return false;
-            }
-
-            listener.onEvent(hero.getName() + " defeated " + enemy.getName());
-
-            hero.addGold(enemy.getReward());
-            listener.onEvent(hero.getName() + " got " + enemy.getReward() + " gold");
-            ui.showStatus(hero);
+        boolean heroWon = fighter.fight(hero, enemy);
+        if (!heroWon) {
+            listener.onEvent(hero.getName() + " was defeated by " + enemy.getName());
+            ui.showGameOver();
+            return false;
         }
 
-        listener.onEvent(hero.getName() + " cleared the dungeon");
-        ui.showVictory();
+        listener.onEvent(hero.getName() + " defeated " + enemy.getName());
+        hero.addGold(enemy.getReward());
+        listener.onEvent(hero.getName() + " got " + enemy.getReward() + " gold");
+        ui.showStatus(hero);
         return true;
     }
 }

@@ -63,10 +63,23 @@ public class Game {
             Hero hero = fighter.createNewHero(name, inventory);
             ui.showStatus(hero);
 
-            Dungeon dungeon = new Dungeon(fighter, ui, log);
-            dungeon.run(hero, difficulty);
+            playGame(hero, difficulty, 1);
         } catch (UnsupportedOperationException e) {
             IO.println("Waiting for modules, change later");
         }
+    }
+
+    private void playGame(Hero hero, Difficulty difficulty, int startRoom) {
+        Dungeon dungeon = new Dungeon(fighter, ui, log);
+
+        for (int room = startRoom; room <= Dungeon.TOTAL_ROOMS; room++) {
+            boolean heroWon = dungeon.playRoom(hero, difficulty, room);
+            if (!heroWon) {
+                return;
+            }
+        }
+
+        log.onEvent(hero.getName() + " cleared the dungeon");
+        ui.showVictory();
     }
 }
