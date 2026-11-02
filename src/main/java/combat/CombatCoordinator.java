@@ -57,7 +57,6 @@ public class CombatCoordinator implements FighterInfo {
                 return false; //Hero lost
             }
         }
-        IO.println("\nYou defeated all " + monsters.size() + "monsters!!");
         return true;//Hero won
     }
 
@@ -72,10 +71,8 @@ public class CombatCoordinator implements FighterInfo {
             }
         }
         if (hero.isAlive()) {
-            IO.println("You defeated " + enemy.getName() + "!!");
             return true;
         } else {
-            IO.println("You were defeated by " + enemy.getName() + "...");
             return false;
         }
     }
@@ -99,6 +96,21 @@ public class CombatCoordinator implements FighterInfo {
 
             }
 
+        }
+    }
+
+    private void enemyTurn(Hero hero, Enemy enemy) {
+        AttackStrategy strategy = getStrategy(enemy);
+
+        attack(enemy, hero, strategy);
+    }
+
+    private AttackStrategy getStrategy(Enemy enemy) {
+        if (enemy instanceof Monster monster) {
+            return monster.getStrategy();
+        } else {
+            AttackStrategy attack = new MonsterAttack();
+            return attack;
         }
     }
 
