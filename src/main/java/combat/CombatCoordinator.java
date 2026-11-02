@@ -16,6 +16,9 @@ Person A Combat and Character
  */
 
 public class CombatCoordinator implements FighterInfo {
+    private final AttackStrategy baseAttack = new BaseAttack();
+    private final AttackStrategy heavyAttack = new HeavyAttack();
+    private final AttackStrategy specialAttack = new SpecialAttack();
 
 
     @Override
@@ -59,7 +62,57 @@ public class CombatCoordinator implements FighterInfo {
     }
 
     private boolean fightOne(Hero hero, Enemy enemy) {
-        return false;
+        while (hero.isAlive() && enemy.isAlive()) {
+            heroTurn(hero, enemy);
+            if (enemy.isAlive()) {
+                enemyTurn(hero, enemy);
+            }
+            if (hero.isAlive() && enemy.isAlive()) {
+                IO.println("Next Round!");
+            }
+        }
+        if (hero.isAlive()) {
+            IO.println("You defeated " + enemy.getName() + "!!");
+            return true;
+        } else {
+            IO.println("You were defeated by " + enemy.getName() + "...");
+            return false;
+        }
+    }
+
+    private void heroTurn(Hero hero, Enemy enemy) {
+        boolean turnUsed = false;
+
+        while (!turnUsed) {
+            IO.println("===your turn=== " +
+                    "\n1. " + baseAttack.getName() +
+                    "\n2. " + heavyAttack.getName() +
+                    "\n3. " + specialAttack.getName());
+            String choice = IO.readln("Choose your action: ");
+            if (choice == null) {
+                choice = "1";
+            }
+            switch (choice.trim()) {
+                case "1" -> turnUsed = true;
+                case "2" -> turnUsed = true;
+                case "3" -> turnUsed = true;//Write attack method
+
+            }
+
+        }
+    }
+
+    private void attack(Fighter attacker, Fighter defender, AttackStrategy strategy) {
+        int damage = DamageCalculator.calculate(strategy, attacker, defender);
+        defender.takeDamage(damage);
+
+        String text = strategy.getMessage(attacker) + " " + defender.getName()
+                + " takes " + damage + "damage";
+        int defense = DamageCalculator.getDefenseBonus(defender);
+        if (defense > 0) {
+            text = text + "your armor blocked " + defense + "";
+        }
+        IO.println("!");
     }
 
     //TODO: HeroTurn
