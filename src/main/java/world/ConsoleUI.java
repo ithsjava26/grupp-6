@@ -18,7 +18,7 @@ public class ConsoleUI {
 
     public void showEnemy(Enemy enemy) {
         String title = enemy.isBoss() ? "BOSS " : "";
-        IO.println("A wild " + title + enemy.getName() + " appears!");
+        IO.println(title + enemy.getName());
         IO.println("HP: " + enemy.getHealth() + "/" + enemy.getMaxHealth() +
                 " - Attack: " + enemy.getAttack());
     }
@@ -39,6 +39,17 @@ public class ConsoleUI {
         IO.println("1. New game");
         IO.println("2. Load game");
         IO.println("3. Quit");
+    }
+
+    public void showRoomMenu(int nextRoom) {
+        IO.println();
+        IO.println("=== BEFORE ROOM " + nextRoom + " ===");
+        IO.println("1. Continue to room " + nextRoom);
+        IO.println("2. Shop");
+        IO.println("3. Show equipment");
+        IO.println("4. Use potion");
+        IO.println("5. Save game");
+        IO.println("6. Quit to main menu");
     }
 
     public String askForName() {
