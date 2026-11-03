@@ -25,12 +25,16 @@ public class Game {
     private final ShopInfo shop;
     private final ConsoleUI ui = new ConsoleUI();
     private final GameLog log = new GameLog();
+    private final EventPublisher events = new EventPublisher();
+    private static final Path LOG_FILE = Path.of("game.log");
     private static final Path SAVE_FILE = Path.of("savegame.txt");
     private final SaveManager saveManager = new SaveManager();
 
     public Game(FighterInfo fighter, ShopInfo shop) {
         this.fighter = fighter;
         this.shop = shop;
+        events.addListener(log);
+        events.addListener(new FileLogListener(LOG_FILE));
     }
 
     public void run() {
@@ -75,7 +79,7 @@ public class Game {
     }
 
     private void playGame(Hero hero, Difficulty difficulty, int startRoom) {
-        Dungeon dungeon = new Dungeon(fighter, ui, log);
+        Dungeon dungeon = new Dungeon(fighter, ui, events);
 
         for (int room = startRoom; room <= Dungeon.TOTAL_ROOMS; room++) {
             boolean heroWon = dungeon.playRoom(hero, difficulty, room);
@@ -88,7 +92,7 @@ public class Game {
             }
         }
 
-        log.onEvent(hero.getName() + " cleared the dungeon");
+        events.onEvent(hero.getName() + " cleared the dungeon");
         ui.showVictory();
     }
 
@@ -107,8 +111,8 @@ public class Game {
                     return true;
                 }
                 case "2" -> IO.println("Shop is coming soon.");
-                case "3" -> IO.println("Equipment view is coming soon.");
-                case "4" -> IO.println("Using potions is coming soon.");
+                case "3" -> ui.showEquipment(hero);
+                case "4" -> ui.usePotion(hero);
                 case "5" -> saveGame(hero, difficulty, nextRoom);
                 case "6" -> {
                     return false;
@@ -124,7 +128,7 @@ public class Game {
         try {
             saveManager.save(SAVE_FILE, data);
             IO.println("Game saved.");
-            log.onEvent(hero.getName() + " saved the game");
+            events.onEvent(hero.getName() + " saved the game");
         } catch (IOException e) {
             IO.println("Could not save the game: " + e.getMessage());
         }
@@ -147,7 +151,7 @@ public class Game {
         try {
             Hero hero = data.createHero(fighter, shop);
 
-            log.onEvent(hero.getName() + " loaded the game");
+            events.onEvent(hero.getName() + " loaded the game");
             IO.println("Game loaded.");
             ui.showStatus(hero);
 

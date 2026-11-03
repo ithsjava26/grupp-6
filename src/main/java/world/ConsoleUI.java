@@ -1,8 +1,8 @@
 package world;
 
-import common.Difficulty;
-import common.Hero;
-import common.Enemy;
+import common.*;
+
+import java.util.List;
 
 public class ConsoleUI {
 
@@ -50,6 +50,45 @@ public class ConsoleUI {
         IO.println("4. Use potion");
         IO.println("5. Save game");
         IO.println("6. Quit to main menu");
+    }
+
+    // Shows the weapon and armor the hero is currently using
+    public void showEquipment(Hero hero) {
+        Inventory inventory = hero.getInventory();
+
+        IO.println("--- Equipment ---");
+
+        inventory.getEquippedWeapon().ifPresentOrElse(
+                weapon -> IO.println("Weapon: " + weapon.name()
+                        + " (level " + weapon.level()
+                        + ", attack +" + weapon.attackBonus() + ")"),
+                () -> IO.println("Weapon: none"));
+
+        inventory.getEquippedArmor().ifPresentOrElse(
+                armor -> IO.println("Armor: " + armor.name()
+                        + " (level " + armor.level()
+                        + ", defense +" + armor.defenseBonus() + ")"),
+                () -> IO.println("Armor: none"));
+    }
+
+    // Uses the first potion in the inventory to heal the hero
+    public void usePotion(Hero hero) {
+        Inventory inventory = hero.getInventory();
+        List<Item> potions = inventory.getItemsOfType(ItemType.POTION);
+
+        if (potions.isEmpty()) {
+            IO.println("You have no potions.");
+            return;
+        }
+
+        Item potion = potions.get(0);
+        int hpBefore = hero.getHealth();
+
+        hero.heal(potion.healAmount());
+        inventory.remove(potion);
+
+        IO.println("You used " + potion.name() + ". HP: "
+                + hpBefore + " -> " + hero.getHealth() + "/" + hero.getMaxHealth());
     }
 
     public String askForName() {
