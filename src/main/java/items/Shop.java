@@ -75,4 +75,9 @@ public class Shop implements ShopInfo {
         int lowest = Math.max(1, roomNumber - 1);
         return lowest + random.nextInt(roomNumber - lowest + 1);
     }
+
+    @Override
+    public Item createItem(ItemType type, int level) {
+        return ItemFactory.create(type, level);
+    }
 }
