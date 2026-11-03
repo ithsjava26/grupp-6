@@ -107,7 +107,7 @@ public class Game {
                     return true;
                 }
                 case "2" -> IO.println("Shop is coming soon.");
-                case "3" -> IO.println("Equipment view is coming soon.");
+                case "3" -> ui.showEquipment(hero);
                 case "4" -> IO.println("Using potions is coming soon.");
                 case "5" -> saveGame(hero, difficulty, nextRoom);
                 case "6" -> {
