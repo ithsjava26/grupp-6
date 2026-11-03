@@ -17,7 +17,8 @@ public class SpecialAttack implements AttackStrategy {
                 "your full power. Dealing double damage against enemies with less than 20% health!";
     }
 
-    public String getAttackMessage(Fighter defender) {
+    @Override
+    public String getMessage(Fighter attacker, Fighter defender) {
         if (defender.getHealth() <= defender.getMaxHealth() * FINISH_LIMIT) {
             return "You sense your enemy's weakness and seize the opportunity. " +
                     "Gathering all your strength, you unleash a final devastating blow.";

@@ -1,6 +1,9 @@
 package combat;
 
 import common.*;
+
+import java.util.List;
+import java.util.stream.IntStream;
 /*
 Person C will call this class to create heroes and enemies and to run a fight
 (it does not handle the work it sends the work to your own classes in your package!)
@@ -14,6 +17,9 @@ Person A Combat and Character
  */
 
 public class CombatCoordinator implements FighterInfo {
+    private final AttackStrategy baseAttack = new BaseAttack();
+    private final AttackStrategy heavyAttack = new HeavyAttack();
+    private final AttackStrategy specialAttack = new SpecialAttack();
 
 
     @Override
@@ -35,12 +41,129 @@ public class CombatCoordinator implements FighterInfo {
 
     @Override
     public boolean fight(Hero hero, Enemy enemy) {
-        throw new UnsupportedOperationException("TO DO -> Person A");
+        if (enemy instanceof MonsterGroup group) {
+            return fightGroup(hero, group); //if its a group then fight monster one by one
+        }
+        return fightOne(hero, enemy);//if its not a group fight only one(Boss)
     }
 
-    //TODO: HeroTurn
-    //TODO: Hero Options (switch)
-    //TODO: Enemy turn
-    //TODO: Enemy getAttack possibility
-    //TODO: END FIGHT IF ONE OF THEM IS DEAD
+    private boolean fightGroup(Hero hero, MonsterGroup group) {
+        List<Monster> monsters = group.getMonsters();
+        printGroup(monsters);
+
+        int number = 0;
+        for (Monster monster : monsters) {
+            number++;
+            IO.println("\n---Enemy " + number + " of " + monsters.size() + " ---");
+            if (!fightOne(hero, monster)) {
+                return false; //Hero lost
+            }
+        }
+
+        return true;//Hero won
+    }
+
+    private void printGroup(List<Monster> monsters) {
+        IO.println("\nEnemies in this Room: ");
+        IntStream.range(0, monsters.size())
+                .forEach(i -> IO.println(" " + (i + 1) + ". "
+                        + "%-20s".formatted(monsters.get(i).getName())
+                        + " (HP " + monsters.get(i).getHealth()
+                        + ", ATK " + monsters.get(i).getAttack() + ")"));
+    }
+
+    private boolean fightOne(Hero hero, Enemy enemy) {
+        printStatus(hero, enemy);
+        while (hero.isAlive() && enemy.isAlive()) {
+            heroTurn(hero, enemy);
+            if (enemy.isAlive()) {
+                enemyTurn(hero, enemy);
+            }
+            if (hero.isAlive() && enemy.isAlive()) {
+                printStatus(hero, enemy);
+            }
+        }
+        if (hero.isAlive()) {
+            IO.println("\nYou defeated " + enemy.getName() + "!");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void heroTurn(Hero hero, Enemy enemy) {
+        boolean turnUsed = false;
+
+        while (!turnUsed) {
+            printHeroMenu(hero);
+            String choice = IO.readln("Choose your action: ");
+            if (choice == null) {
+                choice = "1";
+            }
+            switch (choice.trim()) {
+                case "1" -> {
+                    attack(hero, enemy, baseAttack);
+                    turnUsed = true;
+                }
+                case "2" -> {
+                    attack(hero, enemy, heavyAttack);
+                    turnUsed = true;
+                }
+                case "3" -> {
+                    attack(hero, enemy, specialAttack);
+                    turnUsed = true;
+                }
+                default -> IO.println("Invalid choice, choose between 1-4!");
+
+            }
+        }
+    }
+    private void printHeroMenu(Hero hero) {
+        IO.println("---Your turn---" +
+                "\n1. " + baseAttack.getName()
+                + "\n2. " + heavyAttack.getName()
+                + "\n3. " + specialAttack.getName()
+        );
+    }
+
+    private void enemyTurn(Hero hero, Enemy enemy) {
+        AttackStrategy strategy = getStrategy(enemy);
+
+        attack(enemy, hero, strategy);
+    }
+
+    private AttackStrategy getStrategy(Enemy enemy) {
+        if (enemy instanceof Monster monster) {
+            return monster.getStrategy();
+        } else {
+            AttackStrategy attack = new MonsterAttack();
+            return attack;
+        }
+    }
+
+    private void attack(Fighter attacker, Fighter defender, AttackStrategy strategy) {
+        int damage = DamageCalculator.calculate(strategy, attacker, defender);
+        String message = strategy.getMessage(attacker, defender);
+        defender.takeDamage(damage);
+
+
+        String text = message + "\n" + defender.getName()
+                + " takes " + damage + " damage!" + "\n";
+        int defense = DamageCalculator.getDefenseBonus(defender);
+        if (defense > 0) {
+            text = text + "your armor blocked " + defense + "!" + "\n";
+        }
+        IO.println(text);
+    }
+
+    private void printStatus(Hero hero, Enemy enemy) {
+        int AttackValue = hero.getAttack() + DamageCalculator.getWeaponBonus(hero);
+        int DefenseValue = DamageCalculator.getDefenseBonus(hero);
+
+        IO.println(hero.getName() + ": " + hero.getHealth() + "/" + hero.getMaxHealth()
+                + " HP (ATK " + AttackValue + ", DEF " + DefenseValue + ")"
+                + "\t|\t" + enemy.getName() + ": "
+                + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP");
+
+    }
 }

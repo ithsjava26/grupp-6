@@ -19,11 +19,11 @@ public class EnemyFactory {
             new Layout("Goblin", 15, 2, 1, new MonsterAttack()),
             new Layout("Night crawler", 30, 10, 6, new MonsterAttack()),
             new Layout("Skelleton", 3, 6, 2, new MonsterAttack()),
-            new Layout("Ironhide", 40, 6, 15, new MonsterAttack()),
-            new Layout("Shadowreaper", 10, 9, 10, new MonsterAttack())
+            new Layout("Ironhide", 40, 9, 15, new MonsterAttack()),
+            new Layout("Shadowreaper", 10, 13, 10, new MonsterAttack())
     };
 
-    private static final Layout BOSS = new Layout("Warden", 80, 15, 60, new MonsterAttack());
+    private static final Layout BOSS = new Layout("Warden", 80, 15, 60, new MonsterSpecialBossAttack());
 
     private EnemyFactory() {
     }
