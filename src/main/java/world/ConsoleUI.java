@@ -2,6 +2,7 @@ package world;
 
 import common.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleUI {
@@ -52,6 +53,40 @@ public class ConsoleUI {
         IO.println("6. Quit to main menu");
     }
 
+    // Lets the hero buy items before the next room
+    public void shopMenu(Hero hero, ShopInfo shop, int nextRoom, GameEventListener events) {
+        List<ShopOffer> offers = new ArrayList<>(shop.generateOffers(nextRoom));
+
+        while (true) {
+            showOffers(offers, hero.getGold());
+            String input = IO.readln("Choose: ");
+            if (input == null || input.trim().equals("0")) {
+                return;
+            }
+
+            int index;
+            try {
+                index = Integer.parseInt(input.trim()) - 1;
+            } catch (NumberFormatException e) {
+                IO.println("Not a valid choice.");
+                continue;
+            }
+            if (index < 0 || index >= offers.size()) {
+                IO.println("Not a valid choice.");
+                continue;
+            }
+
+            ShopOffer offer = offers.get(index);
+            if (shop.buy(hero, offer)) {
+                IO.println("You bought " + offer.item().name() + ".");
+                events.onEvent(hero.getName() + " bought " + offer.item().name());
+                offers.remove(offer);
+            } else {
+                IO.println("Not enough gold.");
+            }
+        }
+    }
+
     // Shows the weapon and armor the hero is currently using
     public void showEquipment(Hero hero) {
         Inventory inventory = hero.getInventory();
@@ -90,6 +125,29 @@ public class ConsoleUI {
         IO.println("You used " + potion.name() + ". HP: "
                 + hpBefore + " -> " + hero.getHealth() + "/" + hero.getMaxHealth());
     }
+
+
+    public void showOffers(List<ShopOffer> offers, int gold) {
+        IO.println("--- Shop --- (Your gold: " + gold + ")");
+        for (int i = 0; i < offers.size(); i++) {
+            ShopOffer offer = offers.get(i);
+            Item item = offer.item();
+            IO.println((i + 1) + ". " + item.name()
+                    + " (level " + item.level() + ", " + describe(item) + ")"
+                    + " - " + offer.price() + " gold");
+        }
+        IO.println("0. Leave shop");
+    }
+
+    private String describe(Item item) {
+        return switch (item.type()) {
+            case WEAPON -> "attack +" + item.attackBonus();
+            case ARMOR -> "defense +" + item.defenseBonus();
+            case POTION -> "heals " + item.healAmount();
+        };
+    }
+
+
 
     public String askForName() {
         while (true) {
