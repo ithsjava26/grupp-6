@@ -3,7 +3,7 @@ package combat;
 public class GameGuide {
 
     static void main() {
-        guideMenu();
+        show();
     }
     private static final String BAR = "=============================";
 
@@ -12,7 +12,7 @@ public class GameGuide {
     private GameGuide() {
     }
 
-    public static void guideMenu() {
+    public static void show() {
         boolean running = true;
         while (running) {
             IO.println(menuText());
@@ -74,7 +74,14 @@ public class GameGuide {
     }
 
     static String monsterText() {
-        return "";
+        return "\t ---MONSTER---\n" +
+                "Every room before the boss is full of monsters.\n" +
+                "You fight them one by one!\n" +
+                "❗Your HP is NOT restored after suceeding a room, so be carefull!\n" +
+                "👹 Who you can meet (normal Difficulty)\n" +
+                EnemyFactory.monsterInfo() + EnemyFactory.bossInfo() +
+                "\n👑 The boss will be waiting for you in " + EnemyFactory.BOSS_ROOM +
+                "He is much stronger than the others, so watch out!\n";
     }
 
     static String attackText() {

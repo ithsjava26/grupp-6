@@ -78,5 +78,22 @@ public class EnemyFactory {
         return (int) Math.round(difficultFactor * baseValue);
     }
 
+    static String monsterInfo() {
+        StringBuilder text = new StringBuilder();
+        for (Layout layout : SMALL_MONSTER) {
+            text.append(infoLine(layout));
+        }
+        return text.toString();
+    }
+
+    static String bossInfo() {
+        return infoLine(BOSS);
+    }
+
+    private static String infoLine(Layout layout) {
+        return String.format(" %-14s ❤️ %-3d HP ⚔️ %-3d ATK 💰 %-3d gold\n",
+                layout.name(), layout.health(), layout.attack(), layout.reward());
+    }
+
 
 }
