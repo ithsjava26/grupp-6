@@ -27,4 +27,25 @@ public class GameGuide {
         }
     }
 
+    static String menuText() {
+        return "";
+    }
+
+    static String gameText() {
+        return "";
+    }
+
+    static String monsterText() {
+        return "";
+    }
+
+    static String attackText() {
+        return "";
+    }
+
+    static String equipmentText() {
+        return "";
+    }
+
+
 }
