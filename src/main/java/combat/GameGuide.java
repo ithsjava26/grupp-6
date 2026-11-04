@@ -39,7 +39,31 @@ public class GameGuide {
     }
 
     static String gameText() {
-        return "";
+        return "\t ---THE GAME--- \n"
+                + "📜 The Lore\n "
+                + "Deep below the surface lies a prision that was never meant to be found. \n"
+                + "For centuries, the Warden dragged souls into the darkness of his prision, \n"
+                + "guardet by monsters that were once prisoners themselfes. \n"
+                + "Village by village, people were silenced, their bodies left behind without a soul. \n"
+                + "No one knows how to stop it, except you! "
+                + "Go into the dark, break the curse and end the Warden's hunger,\n"
+                + "before it caputes the soul of the once you love!"
+                + "\n🏰 The dungeon\n"
+                + "There are " + EnemyFactory.BOSS_ROOM + "rooms. "
+                + "The Boss is waiting for you in room " + EnemyFactory.BOSS_ROOM
+                + ".\n⚔️ Combat "
+                + "You and the enemy take turns and you always start.\n" +
+                "In your turn you pick an attack\n" +
+                "💰 If you win you get Gold from the monsters.\n" +
+                "💀 If your HP reach 0 it's game over for you!\n" +
+                "🚪 Between Rooms" +
+                "-> go to the next room\n" +
+                "-> visit the shop\n" +
+                "-> loop at your equipment\n" +
+                "-> drink a potion\n" +
+                "-> save your game\n" +
+                "\n💡 Tip: drink a potion BEFORE the next room. \n" +
+                "It is not possible to drink in a fight!\n";
     }
 
     static String monsterText() {
