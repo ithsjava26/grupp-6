@@ -1,6 +1,7 @@
 package combat;
 
 public class GameGuide {
+    private static final String BAR = "=============================";
 
     //GAME GUIDE, Game, Monster, Attacks, Equipment
 
@@ -28,7 +29,13 @@ public class GameGuide {
     }
 
     static String menuText() {
-        return "";
+        return "\n" + BAR + "\n \tBELOW THE SURFACE \n " +
+                "\t---GAME GUIDE--- \n" + BAR + "\nWhat do you want to know?" +
+                "\n1. 🎮 Game " +
+                "\n2. 👾 Monster " +
+                "\n3. ⚔️ Attacks " +
+                "\n4. 🛡️ Equipment " +
+                "\n0. 🔙 Back\n";
     }
 
     static String gameText() {
