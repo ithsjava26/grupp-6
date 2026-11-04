@@ -1,14 +1,11 @@
 package world;
 
-import common.Difficulty;
-import common.FighterInfo;
-import common.Hero;
-import common.Inventory;
-import common.ShopInfo;
-import common.GameLog;
+import common.*;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
+
 
 /*
 The main logic. It shows the menu and controls the flow of the game, start to end.
@@ -110,7 +107,7 @@ public class Game {
                 case "1" -> {
                     return true;
                 }
-                case "2" -> IO.println("Shop is coming soon.");
+                case "2" -> ui.shopMenu(hero, shop, nextRoom, events);
                 case "3" -> ui.showEquipment(hero);
                 case "4" -> ui.usePotion(hero);
                 case "5" -> saveGame(hero, difficulty, nextRoom);
@@ -121,6 +118,7 @@ public class Game {
             }
         }
     }
+
 
     private void saveGame(Hero hero, Difficulty difficulty, int nextRoom) {
         SaveData data = SaveData.from(hero, difficulty, nextRoom);
