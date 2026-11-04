@@ -9,7 +9,8 @@ public class GameGuide {
     static void main() {
         show();
     }
-    private static final String BAR = "=============================";
+
+    private static final String BAR = "=============================================";
 
     //GAME GUIDE, Game, Monster, Attacks, Equipment
 
@@ -132,10 +133,10 @@ public class GameGuide {
     }
 
     private static String itemLine(ItemType type) {
-        String lines = "";
+        String lines = BAR + "\n";
         for (int level = 1; level <= ItemFactory.MAX_LEVEL; level++) {
             Item item = ItemFactory.create(type, level);
-            lines += "   " + item.name() + "  " + effect(item, type) + "\n";
+            lines += String.format(" %d. %-16s %s%n", level, item.name(), effect(item, type));
         }
         return lines;
     }
