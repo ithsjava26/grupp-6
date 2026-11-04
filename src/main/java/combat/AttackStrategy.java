@@ -14,8 +14,4 @@ public interface AttackStrategy {
         return attacker.getName() + " used " + getName() + "!";
     }
 
-    default String getMissMessage(Fighter attacker, Fighter defender) {
-        return attacker.getName() + " used " + getName() + " but missed!";
-    }
-
 }
