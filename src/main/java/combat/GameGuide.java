@@ -1,6 +1,10 @@
 package combat;
 
 public class GameGuide {
+
+    static void main() {
+        guideMenu();
+    }
     private static final String BAR = "=============================";
 
     //GAME GUIDE, Game, Monster, Attacks, Equipment
@@ -18,7 +22,10 @@ public class GameGuide {
             }
 
             switch (choice.trim()) {
-                case "1" -> IO.println(gameText());
+                case "1" -> {
+                    IO.println(gameText());
+                    IO.readln("🔙 If you want to go back press enter");
+                }
                 case "2" -> IO.println(monsterText());
                 case "3" -> IO.println(attackText());
                 case "4" -> IO.println(equipmentText());
@@ -30,7 +37,7 @@ public class GameGuide {
 
     static String menuText() {
         return "\n" + BAR + "\n \tBELOW THE SURFACE \n " +
-                "\t---GAME GUIDE--- \n" + BAR + "\nWhat do you want to know?" +
+                "\t--- GAME GUIDE --- \n" + BAR + "\nWhat do you want to know?" +
                 "\n1. 🎮 Game " +
                 "\n2. 👾 Monster " +
                 "\n3. ⚔️ Attacks " +
