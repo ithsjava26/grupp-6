@@ -24,7 +24,7 @@ public class SpecialAttack implements AttackStrategy {
                     "Gathering all your strength, you unleash a final devastating blow.";
         }
         return "You gather all your strength and unleash a mighty blow, but your enemy is still " +
-                "to strong. They withstand the full force behind your attack, leaving only a normal strike " +
+                "too strong. They withstand the full force behind your attack, leaving only a normal strike " +
                 "breaking through their skin.";
     }
 

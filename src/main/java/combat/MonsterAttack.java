@@ -19,14 +19,14 @@ public class MonsterAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "A quick claw attack that deals standart damage to its target, " +
+        return "A quick claw attack that deals standard damage to its target, " +
                 "with 20% chance to deal 50% more damage. ";
     }
 
     @Override
     public String getMessage(Fighter attacker, Fighter enemy) {
         if (heavyAttack) {
-            return "The creature lowers its body, before suddendly striking " +
+            return "The creature lowers its body, before suddenly striking " +
                     "you  with its full weight and razor sharp claws";
         }
         return "The creature lunges forward with a frantic hiss, slashing its jagged claws across your skin";

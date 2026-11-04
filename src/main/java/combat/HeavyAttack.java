@@ -12,7 +12,7 @@ public class HeavyAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "A powerfull attack that deals 50% more damage than the players basic attack";
+        return "A powerful attack that deals 50% more damage than the players basic attack";
     }
 
     @Override

@@ -12,7 +12,7 @@ public class BaseAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "A quick strike that deals standart damage to your enemy.";
+        return "A quick strike that deals standard damage to your enemy.";
     }
 
     @Override
