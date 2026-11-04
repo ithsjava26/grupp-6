@@ -2,7 +2,6 @@ package combat;
 
 import common.Fighter;
 
-//TODO: DamageCalculation should also include dmg of the best weapon
 public class HeavyAttack implements AttackStrategy {
     private static final double DAMAGE_FACTOR = 1.5;
 
@@ -13,12 +12,12 @@ public class HeavyAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "A powerfull attack that deals 50% more damage than the players basic attack";
+        return "A powerful attack that deals 50% more damage than the players basic attack";
     }
 
     @Override
     public String getMessage(Fighter attacker, Fighter defender) {
-        return "You gather your strength before unleashing a powerful blow, " +
+        return "💥 You gather your strength before unleashing a powerful blow, " +
                 "putting all your force into one hit.";
     }
 

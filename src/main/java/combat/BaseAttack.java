@@ -12,12 +12,12 @@ public class BaseAttack implements AttackStrategy {
 
     @Override
     public String getDescription() {
-        return "A quick strike that deals standart damage to your enemy.";
+        return "A quick strike that deals standard damage to your enemy.";
     }
 
     @Override
     public String getMessage(Fighter attacker, Fighter defender) {
-        return "You launch a swift attack against your enemy, attacking with speed and " +
+        return "⚔️ You launch a swift attack against your enemy, attacking with speed and " +
                 "precision";
     }
 

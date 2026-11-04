@@ -1,10 +1,6 @@
 package combat;
 
 import common.Enemy;
-/*TODO: Write a EnemyFactory, including different enemies,
-   boss interval, (Give the boss maybe a speacial attack with a low chance),
- */
-
 
 public class Monster implements Enemy {
 
@@ -14,7 +10,7 @@ public class Monster implements Enemy {
     private final int attack;
     private final boolean boss;
     private final int reward;
-    private final AttackStrategy strategy; //Write a class for Attackstrategy
+    private final AttackStrategy strategy;
 
     public Monster(String name, int maxHealth, int attack, boolean boss, int reward,
                    AttackStrategy strategy, int health) {
