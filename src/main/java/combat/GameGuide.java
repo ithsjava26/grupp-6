@@ -6,10 +6,6 @@ import items.ItemFactory;
 
 public class GameGuide {
 
-    static void main() {
-        show();
-    }
-
     private static final String BAR = "=============================================";
 
     //GAME GUIDE, Game, Monster, Attacks, Equipment
