@@ -1,5 +1,9 @@
 package combat;
 
+import common.Item;
+import common.ItemType;
+import items.ItemFactory;
+
 public class GameGuide {
 
     static void main() {
@@ -117,7 +121,31 @@ public class GameGuide {
     }
 
     static String equipmentText() {
-        return "";
+        return "\t ---EQUIPMENT---\n" +
+                " 🗡️ Weapons (more damage on every attack)\n" +
+                itemLine(ItemType.WEAPON) +
+                "\n 🛡️ Armor (blocks damage on every hit)\n" +
+                itemLine(ItemType.ARMOR) +
+                "\n 🧪 Potion (heal you, only between rooms!)\n" +
+                itemLine(ItemType.POTION) +
+                "\n 💡 Check shop as often as possible, better knife better life!";
+    }
+
+    private static String itemLine(ItemType type) {
+        String lines = "";
+        for (int level = 1; level <= ItemFactory.MAX_LEVEL; level++) {
+            Item item = ItemFactory.create(type, level);
+            lines += "   " + item.name() + "  " + effect(item, type) + "\n";
+        }
+        return lines;
+    }
+
+    private static String effect(Item item, ItemType type) {
+        return switch (type) {
+            case WEAPON -> "adds " + item.attackBonus() + " damage";
+            case ARMOR -> "blocks " + item.defenseBonus() + " damage";
+            case POTION -> "heals " + item.healAmount() + " HP";
+        };
     }
 
 
