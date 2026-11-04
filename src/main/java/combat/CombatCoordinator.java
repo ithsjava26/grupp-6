@@ -120,9 +120,9 @@ public class CombatCoordinator implements FighterInfo {
     }
     private void printHeroMenu(Hero hero) {
         IO.println("---Your turn---" +
-                "\n1. ⚔️" + baseAttack.getName()
-                + "\n2. 💥" + heavyAttack.getName()
-                + "\n3. 🗡️" + specialAttack.getName()
+                "\n1. ⚔️ " + baseAttack.getName()
+                + "\n2. 💥 " + heavyAttack.getName()
+                + "\n3. 🗡️ " + specialAttack.getName()
         );
     }
 
