@@ -17,7 +17,7 @@ public class HeavyAttack implements AttackStrategy {
 
     @Override
     public String getMessage(Fighter attacker, Fighter defender) {
-        return "You gather your strength before unleashing a powerful blow, " +
+        return "💥 You gather your strength before unleashing a powerful blow, " +
                 "putting all your force into one hit.";
     }
 

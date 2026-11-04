@@ -23,10 +23,10 @@ public class MonsterSpecialBossAttack extends ChanceAttack {
     @Override
     public String getMessage(Fighter attacker, Fighter defender) {
         if (isHeavy()) {
-            return "The boss unleashes a massive roar as dark energy gathers around its body," +
+            return "☠️ The boss unleashes a massive roar as dark energy gathers around its body," +
                     "before releasing a heavy force that drains the life of your soul in seconds.";
         }
-        return "The boss lunges forward with a powerful strike, its heavy blow aimed straight at you.";
+        return "👹 The boss lunges forward with a powerful strike, its heavy blow aimed straight at you.";
     }
 
 }

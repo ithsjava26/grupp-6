@@ -17,7 +17,7 @@ public class BaseAttack implements AttackStrategy {
 
     @Override
     public String getMessage(Fighter attacker, Fighter defender) {
-        return "You launch a swift attack against your enemy, attacking with speed and " +
+        return "⚔️ You launch a swift attack against your enemy, attacking with speed and " +
                 "precision";
     }
 

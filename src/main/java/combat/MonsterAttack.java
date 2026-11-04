@@ -24,9 +24,9 @@ public class MonsterAttack extends ChanceAttack {
     @Override
     public String getMessage(Fighter attacker, Fighter enemy) {
         if (isHeavy()) {
-            return "The creature lowers its body, before suddenly striking " +
+            return "💢 The creature lowers its body, before suddenly striking " +
                     "you  with its full weight and razor sharp claws";
         }
-        return "The creature lunges forward with a frantic hiss, slashing its jagged claws across your skin";
+        return "🐾 The creature lunges forward with a frantic hiss, slashing its jagged claws across your skin";
     }
 }

@@ -66,7 +66,7 @@ public class CombatCoordinator implements FighterInfo {
     private void printGroup(List<Monster> monsters) {
         IO.println("\nEnemies in this Room: ");
         IntStream.range(0, monsters.size())
-                .forEach(i -> IO.println(" " + (i + 1) + ". "
+                .forEach(i -> IO.println(" " + (i + 1) + ". 👾 "
                         + "%-20s".formatted(monsters.get(i).getName())
                         + " (HP " + monsters.get(i).getHealth()
                         + ", ATK " + monsters.get(i).getAttack() + ")"));
@@ -84,7 +84,7 @@ public class CombatCoordinator implements FighterInfo {
             }
         }
         if (hero.isAlive()) {
-            IO.println("\nYou defeated " + enemy.getName() + "!");
+            IO.println("\n🏆 You defeated " + enemy.getName() + "!");
             return true;
         } else {
             return false;
@@ -120,9 +120,9 @@ public class CombatCoordinator implements FighterInfo {
     }
     private void printHeroMenu(Hero hero) {
         IO.println("---Your turn---" +
-                "\n1. " + baseAttack.getName()
-                + "\n2. " + heavyAttack.getName()
-                + "\n3. " + specialAttack.getName()
+                "\n1. ⚔️" + baseAttack.getName()
+                + "\n2. 💥" + heavyAttack.getName()
+                + "\n3. 🗡️" + specialAttack.getName()
         );
     }
 
@@ -149,11 +149,11 @@ public class CombatCoordinator implements FighterInfo {
         int dealt = before - defender.getHealth();
 
 
-        String text = message + "\n" + defender.getName()
+        String text = message + "\n💔 " + defender.getName()
                 + " takes " + dealt + " damage!" + "\n";
         int defense = DamageCalculator.getDefenseBonus(defender);
         if (defense > 0) {
-            text = text + "your armor blocked " + defense + "!" + "\n";
+            text = text + "🛡️ your armor blocked " + defense + "!" + "\n";
         }
         IO.println(text);
     }
@@ -162,9 +162,9 @@ public class CombatCoordinator implements FighterInfo {
         int AttackValue = hero.getAttack() + DamageCalculator.getWeaponBonus(hero);
         int DefenseValue = DamageCalculator.getDefenseBonus(hero);
 
-        IO.println(hero.getName() + ": " + hero.getHealth() + "/" + hero.getMaxHealth()
+        IO.println("❤️ " + hero.getName() + ": " + hero.getHealth() + "/" + hero.getMaxHealth()
                 + " HP (ATK " + AttackValue + ", DEF " + DefenseValue + ")"
-                + "\t|\t" + enemy.getName() + ": "
+                + "\t|\t👾 " + enemy.getName() + ": "
                 + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP");
 
     }
