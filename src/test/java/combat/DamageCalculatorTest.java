@@ -20,8 +20,4 @@ class DamageCalculatorTest {
         assertEquals(10,
                 DamageCalculator.calculate(new BaseAttack(), hero, monster));
     }
-
-    //TODO: As soon as Inventory exists i can use weapon to test DamageCalculator
-
-
 }
