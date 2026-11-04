@@ -7,7 +7,6 @@ import common.Hero;
 import common.FighterInfo;
 import common.Inventory;
 import common.ShopInfo;
-import items.ItemFactory;
 
 public record SaveData(String name, int health, int gold, Difficulty difficulty,
                        int room, List<SavedItem> items) {
@@ -30,7 +29,7 @@ public record SaveData(String name, int health, int gold, Difficulty difficulty,
     public Hero createHero(FighterInfo fighter, ShopInfo shop) {
         Inventory inventory = shop.createInventory();
         for (SavedItem saved : items) {
-            inventory.add(ItemFactory.create(saved.type(), saved.level()));
+            inventory.add(shop.createItem(saved.type(), saved.level()));
         }
         return fighter.loadHero(name, health, gold, inventory);
     }
