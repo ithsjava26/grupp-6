@@ -24,11 +24,24 @@ public class GameGuide {
             switch (choice.trim()) {
                 case "1" -> {
                     IO.println(gameText());
+                    IO.println(BAR);
                     IO.readln("🔙 If you want to go back press enter");
                 }
-                case "2" -> IO.println(monsterText());
-                case "3" -> IO.println(attackText());
-                case "4" -> IO.println(equipmentText());
+                case "2" -> {
+                    IO.println(monsterText());
+                    IO.println(BAR);
+                    IO.readln("🔙 If you want to go back press enter");
+                }
+                case "3" -> {
+                    IO.println(attackText());
+                    IO.println(BAR);
+                    IO.readln("🔙 If you want to go back press enter");
+                }
+                case "4" -> {
+                    IO.println(equipmentText());
+                    IO.println(BAR);
+                    IO.readln("🔙 If you want to go back press enter");
+                }
                 case "0" -> running = false;
                 default -> IO.println("❌ Please choose a number between 1-4!\n");
             }
@@ -40,7 +53,7 @@ public class GameGuide {
                 "\t--- GAME GUIDE --- \n" + BAR + "\nWhat do you want to know?" +
                 "\n1. 🎮 Game " +
                 "\n2. 👾 Monster " +
-                "\n3. ⚔️ Attacks " +
+                "\n3. ⚔️ Player " +
                 "\n4. 🛡️ Equipment " +
                 "\n0. 🔙 Back\n";
     }
@@ -85,7 +98,22 @@ public class GameGuide {
     }
 
     static String attackText() {
-        return "";
+        return "\t---PLAYER---\n" +
+                "📊 Starting stats of the player:\n" +
+                " ❤️ HP:   " + Player.MAX_HEALTH + "\n" +
+                " ⚔️ ATK:  " + Player.START_ATTACK + "\n" +
+                " 💰 GOLD: " + Player.START_GOLD + "\n" +
+                "\n 🎯 Player Attacks:\n" +
+                attackLine(" ⚔️ ", new BaseAttack(), 1.0) +
+                attackLine(" 💥 ", new HeavyAttack(), 1.5) +
+                attackLine(" 🗡️ ", new SpecialAttack(), 2.0) +
+                " 💡 Buy better weapons and armor in the shop to get stronger!";
+    }
+
+    private static String attackLine(String icon, AttackStrategy attack, double multiplier) {
+        double damage = Math.round(Player.START_ATTACK * multiplier);
+        return " " + icon + " " + attack.getName() + "| ⚔️ " + damage + " damage \n" +
+                attack.getDescription() + "\n";
     }
 
     static String equipmentText() {
