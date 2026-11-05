@@ -14,7 +14,7 @@ public class SpecialAttack implements AttackStrategy {
     @Override
     public String getDescription() {
         return "You gather all your Strength, waiting for the perfect opportunity to unleash " +
-                "your full power. Dealing double damage against enemies with less than 20% health!";
+                "your full power. \nDealing double damage against enemies with less than 20% health!";
     }
 
     @Override
