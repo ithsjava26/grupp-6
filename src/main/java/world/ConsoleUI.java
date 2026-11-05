@@ -39,7 +39,8 @@ public class ConsoleUI {
         IO.println("=== BELOW THE SURFACE ===");
         IO.println("1. New game");
         IO.println("2. Load game");
-        IO.println("3. Quit");
+        IO.println("3. Game guide");
+        IO.println("4. Quit");
     }
 
     public void showRoomMenu(int nextRoom) {
