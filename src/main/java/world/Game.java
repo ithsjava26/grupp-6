@@ -5,6 +5,7 @@ import common.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
+import combat.GameGuide;
 
 
 /*
@@ -49,7 +50,8 @@ public class Game {
             switch (choice) {
                 case "1" -> newGame();
                 case "2" -> loadGame();
-                case "3" -> {
+                case "3" -> GameGuide.show();
+                case "4" -> {
                     IO.println("Goodbye!");
                     running = false;
                 }
